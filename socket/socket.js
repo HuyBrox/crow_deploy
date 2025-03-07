@@ -10,7 +10,7 @@ const server = http.createServer(app);
 const PORT = process.env.PORT || 5000;
 const io = new Server(server, {
     cors: {
-        origin: `http://localhost:${PORT}`,
+        origin: `https://crow-r6s9.onrender.com`,
         methods: ["GET", "POST"],
     },
     pingInterval: 25000,
