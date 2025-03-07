@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!userId) return;
 
     // Kết nối Socket.io (lưu ý: chỉnh sửa URL nếu cần)
-    const socket = io('http://localhost:5000', { query: { userId } });
+    const socket = io('https://crow-r6s9.onrender.com', { query: { userId } });
     window.socket = socket;
     // Xử lý danh sách online users (giữ nguyên)
     // socket.on('getOnlineUsers', (onlineUserIds) => {
@@ -54,12 +54,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // Đối với cả caller và callee, Peer phải được khởi tạo sớm để đảm bảo rằng
     // peer.id đã có khi cần gửi hoặc nhận cuộc gọi.
     const peer = new Peer(undefined, {
-        host: 'localhost',
-        port: 5000,
-        path: '/peerjs',
-        secure: false,
-        debug: 3,
-    });
+    host: 'crow-r6s9.onrender.com', // Thay localhost bằng domain online
+    port: 443, // Render chỉ hỗ trợ HTTPS, nên dùng cổng 443 (mặc định cho HTTPS)
+    path: '/peerjs', // Giữ nguyên nếu server vẫn dùng đường dẫn này
+    secure: true, // Bật HTTPS
+    debug: 3,
+});
+
 
     // Lưu lại peer id khi đã được mở kết nối
     let currentPeerId = null;
