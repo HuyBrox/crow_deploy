@@ -1,0 +1,14 @@
+mixin contact_list(user)
+    .contact-container
+        // Nút mở danh sách
+        button#open-contact-btn.contact-btn
+            i.fas.fa-comments
+
+        // Danh sách người liên hệ
+        .contact-list#contact-list
+            button#close-contact-btn.close-btn
+                i.fas.fa-times
+            // Ô tìm kiếm
+            input#search-contact(type="text" placeholder="Tìm kiếm liên hệ...")
+            // Danh sách người liên hệ sẽ được thêm động qua JavaScript
+            #contact-items

@@ -1,0 +1,187 @@
+extends ../../layout/default.pug
+include ../../mixin/alert.pug
+block style
+    link(rel="stylesheet" href="./css/home.css")
+block main
+        +alert-success(5000)
+        +alert-error(5000)
+        div.section-all
+            //section one//
+            div.section-one
+                div.container
+                    div.inner-wrap
+                        div.inner-content
+                            div.inner-list
+                                div
+                                    p 50% OFF  
+                                P Học từ Hôm nay
+                            h1.inner-title
+                                p.td1 Ngôn ngữ là 
+                                span.highlight chìa khóa
+                                p.td2 mở ra tương lai
+                            p.inner-desc
+                                p Chúng tôi cung cấp các khóa học phù hợp với mục tiêu
+                                |và sở thích của bạn.
+                            div.inner-list-2
+                                button.btn Học tập
+                                img(src="./img/img-home/buttonvideo.svg", alt="Học tập Image", width="45", height="45") 
+                        div.inner-image
+                            div.number-lesson
+                                img(src="./img/img-home/elip.svg", alt="Học tập Image", width="50.311px", height="48px")
+                                p.inner-lesson
+                                |100+
+                                br
+                                |Bài Giảng
+                            div.rectangle
+                            div.elip-1
+                                div.elip-2
+                                    div.elip-3
+                                        img(src="./img/img-home/image-try.png", alt="Học tập Image", width="343.793px", height="313px")
+        
+            //end section one //
+            //section two //
+            div.section-two
+                h2.title Một số khóa học phổ biến
+                div.course-container
+                    div.inner-wrap
+                        div.course-card
+                            img(src="./img/img-home/course-1.png" alt="30 ngày học tiếng Anh")
+                            h3 30 ngày học tiếng Anh cho người mới bắt đầu
+                            div.hpp
+                                p 📚 1500 Lượt học 
+                                p ⭐⭐⭐⭐⭐
+                        div.course-card
+                            img(src="./img/img-home/course-2.png" alt="30 ngày học tiếng Anh")
+                            h3 30 ngày học tiếng Anh cho người mới bắt đầu
+                            div.hpp
+                                p 📚 1500 Lượt học 
+                                p ⭐⭐⭐⭐⭐
+                        div.course-card
+                            img(src="./img/img-home/course-3.png" alt="30 ngày học tiếng Anh")
+                            h3 30 ngày học tiếng Anh cho người mới bắt đầu
+                            div.hpp 
+                                p 📚 1500 Lượt học 
+                                p ⭐⭐⭐⭐⭐
+                        div.course-card
+                            img(src="./img/img-home/course-4.png" alt="30 ngày học tiếng Anh")
+                            h3 30 ngày học tiếng Anh cho người mới bắt đầu
+                            div.hpp
+                                p 📚 1500 Lượt học 
+                                p ⭐⭐⭐⭐⭐
+            //end section two //
+            // section three //
+            div.section-three
+                div.background-tool
+                    h2.title Ôn Luyện Đa Dạng
+                    div.icon-rain
+                        img(src="./img/img-home/rain.svg")
+                    div.container 
+                        div.inner-wrap
+                            div.grid-item
+                                img(src="./img/img-home/pencil.png" alt="Trắc nghiệm") 
+                                p Trắc nghiệm
+                            div.grid-item 
+                                img(src="./img/img-home/science.png" alt="Trả lời ngắn") 
+                                p Trả lời ngắn
+                            div.grid-item 
+                                img(src="./img/img-home/tech.png" alt="Điền từ") 
+                                p Điền từ
+                            div.grid-item 
+                                img(src="./img/img-home/med.svg" alt="Mini game") 
+                                p Mini game
+                            div.grid-item 
+                                img(src="./img/img-home/math.svg" alt="Sắp xếp hội thoại") 
+                                p Sắp xếp hội thoại
+                            div.grid-item 
+                                img(src="./img/img-home/food-delivery.png" alt="Hình ảnh") 
+                                p Hình ảnh
+                            div.grid-item 
+                                img(src="./img/img-home/graduating-student.png" alt="Thẻ học tập") 
+                                p Thẻ học tập
+                            div.grid-item 
+                                img(src="./img/img-home/art-book.svg" alt="Luyện nghe") 
+                                p Luyện nghe
+            // end section three //
+
+            // section four //
+            div.section-four
+                h2.title Nhu cầu đa dạng , phong phú đáp ứng mọi vần đề
+                div.container
+                    div.inner-wrap
+                        div.inner-block-item
+                            div.inner-image(style="background: #A6CF4A;")
+                                img(src="./img/img-home/pen.png", alt="")
+                            h3.inner-title Từ vựng 
+                            p.inner-desc Từ vựng phong phú và đa dạng 
+                                        |với hơn 170.000+ từ vựng
+                        div.inner-block-item
+                            div.inner-image(style="background: #A6CF4A;")
+                                img(src="./img/img-home/pen.png", alt="")
+                            h3.inner-title Từ vựng 
+                            p.inner-desc Từ vựng phong phú và đa dạng 
+                                        |với hơn 170.000+ từ vựng
+                        div.inner-block-item
+                            div.inner-image(style="background: #A6CF4A;")
+                                img(src="./img/img-home/pen.png", alt="")
+                            h3.inner-title Từ vựng 
+                            p.inner-desc Từ vựng phong phú và đa dạng 
+                                        |với hơn 170.000+ từ vựng
+                        div.inner-block-item
+                            div.inner-image(style="background: #A6CF4A;")
+                                img(src="./img/img-home/pen.png", alt="")
+                            h3.inner-title Từ vựng 
+                            p.inner-desc Từ vựng phong phú và đa dạng 
+                                        |với hơn 170.000+ từ vựng
+            // end section four //
+            //  section five //  
+            div.section-five
+                h2.title Nhu cầu đa dạng , phong phú đáp ứng mọi vần đề
+                div.container
+                    div.inner-wrap
+                        div.inner-block-item
+                            img(src="./img/img-home/online-class.png", alt="")
+                            div.month
+                                p.inner-desc 🔥 16 Tháng 2
+                                h3.inner-title Học Tiếng Anh Qua Phim Ảnh và Bài Hát
+                        div.inner-block-item
+                            img(src="./img/img-home/online-class.png", alt="")
+                            div.month
+                                p.inner-desc 🔥 16 Tháng 2
+                                h3.inner-title Học Tiếng Anh Qua Phim Ảnh và Bài Hát
+                        div.inner-block-item
+                            img(src="./img/img-home/online-class.png", alt="")
+                            div.month
+                                p.inner-desc 🔥 16 Tháng 2
+                                h3.inner-title Học Tiếng Anh Qua Phim Ảnh và Bài Hát
+                        div.inner-block-item
+                            img(src="./img/img-home/online-class.png", alt="")
+                            div.month
+                                p.inner-desc 🔥 16 Tháng 2
+                                h3.inner-title Học Tiếng Anh Qua Phim Ảnh và Bài Hát
+            //  end section five //
+
+            // section six 
+            div.section-six
+                h2.title Mọi người nói gì về trang web 
+                div.container-pagesix
+                    dev.inner-wrap
+                        dev.inner-image
+                            dev.background
+                                img(src="./img/img-home/course-2.png" alt="30 ngày học tiếng Anh")
+                        dev.inner-content
+                            img(src="./img/img-home/icon-ngacD.svg", alt="")
+                            br
+                            dev.icon
+                                img(src="./img/img-home/star.svg", alt="")
+                                img(src="./img/img-home/star.svg", alt="")
+                                img(src="./img/img-home/star.svg", alt="")
+                                img(src="./img/img-home/star.svg", alt="")
+                                img(src="./img/img-home/star.svg", alt="")
+                            p.content Học với Crow đã giúp tôi đạt được mục tiêu thi chứng chỉ ngoại ngữ trong thời gian ngắn. Tôi rất biết ơn đội ngũ phát triển trang web này!
+                            h3 Ly Ly
+                            p  Ca sĩ 
+
+
+
+
+            // end section six

@@ -1,0 +1,31 @@
+extends ../../layout/default
+include ../../mixin/alert
+
+block style
+    link(rel="stylesheet" href="/css/flashcard/quiz.css")
+    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css")
+block main
+    +alert-success(5000)
+    +alert-error(5000)
+    .container
+        .quiz-container
+            h1 Bài tập từ vựng: #{flashcard.name}
+            #quiz-form
+                each answers, question in quiz
+                    .quiz-question
+                        h3 #{question}
+                        .quiz-answers
+                            each answer, index in answers
+                                - const isCorrect = answer.startsWith('+');
+                                - const answerText = answer.substring(1);
+                                .quiz-answer
+                                    input(type="radio" name=question id=`${question}-${index}` value=answerText data-correct=isCorrect ? 'true' : 'false')
+                                    label(for=`${question}-${index}`) #{answerText}
+                .quiz-submit
+                    button#grade-quiz.btn.btn-custom Chấm điểm
+            #quiz-results(style="display: none;")
+                h2 Kết quả
+                p#score Điểm: <span>0</span> / #{Object.keys(quiz).length}
+
+block script2
+    script(src="/js/flashcard/quiz.js")

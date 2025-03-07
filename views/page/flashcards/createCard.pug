@@ -1,0 +1,44 @@
+extends ../../layout/default
+include ../../mixin/alert
+
+block style
+    link(rel="stylesheet" href="/css/flashcard/create.css")
+    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css")
+
+
+block main
+    +alert-success(5000)
+    +alert-error(5000)
+    .container(style="padding-top: 50px;")
+        .card-creation-container
+            h2.mb-4.text-center Tạo Bộ Thẻ Học Tập Mới
+
+            form(action="/flashcards/createCard" method="POST")
+                .form-group
+                    label(for="name") Tên bộ thẻ
+                    input#name.form-control(type="text" name="name" value=name required placeholder="Nhập tên bộ thẻ (ví dụ: Từ vựng tiếng Anh cơ bản)")
+
+                .form-group
+                    label(for="cardsText") Nội dung thẻ (mỗi dòng một thẻ)
+                    textarea#cardsText.form-control(name="cardsText" rows="8" placeholder="Nhập các thẻ theo định dạng: từ vựng - nghĩa" value=cardsText)
+                    .input-guide
+                        p.mb-2 Hướng dẫn nhập liệu:
+                        ul
+                            li Mỗi dòng là một thẻ học tập
+                            li Sử dụng dấu "-" để phân tách từ vựng và nghĩa
+                            li Ví dụ:
+                                pre.
+                                    hello - xin chào
+                                    goodbye - tạm biệt
+                                    thanks - cảm ơn
+
+                .card-preview#cardPreview
+                    p.text-muted.text-center Chưa có thẻ nào được nhập
+
+                .card-count#cardCount 0 thẻ
+
+                .text-center.mt-4
+                    button.btn.btn-create(type="submit") Tạo Bộ Thẻ
+
+block script2
+    script(src="/js/flashcard/createCard.js" type="module")

@@ -1,0 +1,218 @@
+/* General Styles */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #ffffff;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 20px;
+  height: 1800px;
+  margin-top: 100px;
+  
+}
+
+/* Profile Section */
+.profile {
+  display: right;
+  gap : 20px;
+  padding: 20px;
+  border-radius: 10px;
+  background: white;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.profile-avatar {
+  position: relative; 
+  z-index: 1; 
+  margin-top: 100px;
+  margin-bottom: 25px
+}
+
+.profile-avatar::before {
+  content: '';
+  position: absolute;
+  top: -180px; 
+  left: -10px; 
+  width: 1380px;
+  height:230px;
+  background-color: #F17202; 
+  border-radius: 10px;
+  z-index: -10; 
+}
+
+.profile-avatar img {
+  width: 145px;
+  height: 137px;
+  border-radius: 50%;
+  border: 3px solid black;
+}
+
+.profile-info {
+  margin-left: 20px;
+}
+
+.profile-info h2 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.profile-info p {
+  margin: 20px 0 ;
+  font-size: 16px;
+}
+.profile .profile-info .profile-flag  {
+  display: flex;
+  align-items: center;
+  justify-self: space-between;
+  gap: 10px;
+}
+
+.profile-flag img{
+  width: 50px;
+  height: 50px;
+  flex-shrink: 0; 
+}
+/*edit */
+.edit button {
+  background-color: #000000;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+  margin-left: 1200px;
+}
+
+/* Profile Stats */
+.profile-stats {
+  display: flex;
+  justify-content: space-around;
+  padding: 25px;
+  border-radius: 10px;
+  /* margin-bottom: 40px; */
+  background: rgb(210, 208, 201);
+  box-shadow: 12px 20px 6px rgba(88, 82, 82, 0.1); 
+  margin-right: 70%;
+}
+
+.stat {
+  text-align: center;
+  padding: 15px;
+  background: #e9eaec;
+  color: black;
+  border-radius: 20px;
+  width: 120px; 
+  font-weight: bold;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+}
+
+.stat-title {
+  font-size: 16px; 
+  color: #666;
+  margin: 0;
+}
+
+.stat-value {
+  font-size: 22px; 
+  color: #F17202;
+  margin: 5px 0;
+}
+
+/* Activity Section */
+.activity {
+  text-align: center;
+  height: 18%;
+  justify-content: space-around;
+  padding: 30px;
+  border-radius: 10px;
+  margin-top: -147px;
+  /* margin-bottom: 100px; */
+  background: rgb(210, 208, 201);
+  box-shadow: 12px 20px 6px rgba(88, 82, 82, 0.1); 
+  margin-left: 31%;
+  height: 8.5%;
+}
+.activity h3 {
+  color: #F17202;
+  margin-top: 5px;
+  margin-bottom: 20px;  
+  font-size: 20px; 
+}
+
+.no-activity {
+  color: #a27bf1;
+  text-align: center;
+  font-size: 16px;
+}
+
+/* Courses Section */
+.courses {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  margin-block-start: 30px;
+  text-align: center; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.course-list {
+  display: flex;
+  flex-direction: row; 
+  gap: 20px;
+  overflow-x: auto; 
+  max-width: 80%;
+  padding-bottom: 30px;
+  white-space: nowrap; 
+}
+
+.course-list::-webkit-scrollbar {
+  height: 13px;;
+}
+
+.course-list::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.course-list::-webkit-scrollbar-thumb {
+  background: #F17202;
+  border-radius: 0;
+}
+
+.course-list > .course-a {
+  flex: 0 0 auto;
+}
+
+.course-a {
+  display: flex; 
+  flex-direction: column;
+  align-items: center;
+  background: white;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  width: 300px; 
+  white-space: normal; 
+}
+
+.course-image img {
+  width: 120px;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 25%;
+}
+
+.course-info {
+  padding: 10px;
+}

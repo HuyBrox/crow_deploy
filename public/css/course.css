@@ -1,0 +1,192 @@
+.courses {
+  box-sizing: border-box;
+  background: #f17202;
+  width: 100%;
+  height: 337px;
+}
+
+.subtitle {
+  color: #fff;
+  font-family: Inter;
+  font-size: 40px;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 80px;
+}
+.description {
+  width: 516px;
+  height: 52px;
+  color: #fff;
+  text-align: center;
+  font-family: Inter;
+  font-size: 16px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* section-all */
+.section-all {
+  width: 100%;
+  height: auto; /* Tự động điều chỉnh chiều cao */
+  background: #fff;
+}
+
+.section-all .course-container {
+  width: 90%; /* Giảm chiều rộng trên các thiết bị nhỏ hơn */
+  max-width: 1074px;
+  margin: 0 auto;
+}
+
+.section-all .course-container .wrap {
+  display: flex;
+  flex-wrap: wrap; /* Đảm bảo các mục xuống dòng trên màn hình nhỏ */
+  gap: 16px; /* Khoảng cách giữa các mục */
+  justify-content: center; /* Canh giữa nội dung */
+}
+
+.section-all .course-container .wrap .course-card {
+  /* display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 252px;
+  height: 273px;
+  border-radius: 16px;
+  border: 0.5px solid #f2f2f2;
+  background: #fff;
+  box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.04); */
+  display: grid;
+  max-width: 240px;
+  padding: 20px;
+  text-decoration: none;
+  color: currentColor;
+  border-radius: 20px;
+  place-content: center;
+  place-items: center;
+  aspect-ratio: 1/1;
+  row-gap: 16px;
+}
+
+@property --gradient-angle {
+  syntax: "<angle>";
+  initial-value: 0turn;
+  inherits: false;
+}
+
+/* animation - huy */
+.course-card {
+  animation: 2s gradient-angle infinite linear;
+  border: 3px solid transparent;
+  background-image: linear-gradient(#fff9ee, #f5f1eb),
+    conic-gradient(
+      from var(--gradient-angle),
+      #584827 0%,
+      #c7a03c 37%,
+      #f9de90 30%,
+      #c7a03c 33%,
+      #584827 40%,
+      #584827 50%,
+      #c7a03c 77%,
+      #f9de90 80%,
+      #c7a03c 83%,
+      #584827 90%
+    );
+  background-clip: padding-box, border-box;
+  background-origin: padding-box, border-box;
+}
+
+@keyframes gradient-angle {
+  to {
+    --gradient-angle: 1turn;
+  }
+}
+/* end animation */
+.section-all .course-container .wrap .course-card img {
+  width: 90%;
+  height: 140px;
+  border-radius: 10px;
+  margin-bottom: 16px;
+}
+
+.section-all .course-container .wrap .course-card h3 {
+  width: 90%;
+  color: #030303;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.section-all .course-container .wrap .course-card p {
+  width: 90%;
+  color: #717171;
+  font-family: Inter;
+  font-size: 13px;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* Responsive styles */
+@media (max-width: 1024px) {
+  .section-all .course-container .wrap .course-card {
+    width: 220px; /* Giảm chiều rộng trên màn hình vừa */
+    height: 250px; /* Giảm chiều cao */
+  }
+
+  .section-all .course-container .wrap .course-card h3 {
+    font-size: 14px; /* Giảm cỡ chữ */
+  }
+
+  .section-all .course-container .wrap .course-card p {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .section-all .course-container .wrap {
+    gap: 12px; /* Giảm khoảng cách giữa các mục */
+  }
+
+  .section-all .course-container .wrap .course-card {
+    width: 200px; /* Giảm chiều rộng hơn nữa */
+    height: 230px;
+  }
+
+  .section-all .course-container .wrap .course-card img {
+    height: 120px; /* Giảm chiều cao ảnh */
+  }
+
+  .section-all .course-container .wrap .course-card h3 {
+    font-size: 13px; /* Cỡ chữ nhỏ hơn */
+  }
+
+  .section-all .course-container .wrap .course-card p {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-all .course-container {
+    width: 100%; /* Full-width trên màn hình nhỏ */
+  }
+
+  .section-all .course-container .wrap {
+    flex-direction: column; /* Xếp dọc */
+    align-items: center;
+    gap: 16px;
+  }
+
+  .section-all .course-container .wrap .course-card {
+    width: 90%; /* Chiếm gần hết chiều ngang màn hình */
+    height: auto; /* Chiều cao tự động điều chỉnh */
+  }
+
+  .section-all .course-container .wrap .course-card img {
+    height: 150px; /* Tăng chiều cao ảnh để cân đối */
+  }
+}
+.fa-star {
+  color: gold; /* Màu vàng */
+  margin: 0 2px; /* Khoảng cách giữa các sao */
+  font-size: 14px; /* Điều chỉnh kích thước */
+}

@@ -1,0 +1,29 @@
+mixin alert-success(time)
+    - if (messages.success)
+        .message.info.ml-5(
+            class="alert-success"
+            data-time=time
+            show-alert
+            )
+            .success-animation
+                svg.checkmark-success(xmlns='http://www.w3.org/2000/svg' viewbox='0 0 52 52')
+                    circle.checkmark__circle__success(cx='26' cy='26' r='25' fill='none')
+                    path.checkmark__check(fill='none' d='M14.1 27.2l7.1 7.2 16.7-16.8')
+            div= messages.success
+            span.close-alert-success.close-alert x
+
+mixin alert-error(time)
+    - if (messages.error)
+        .message.info.ml-5(
+            class="alert-error"
+            data-time=time
+            show-alert
+            )
+            .success-animation
+                svg.checkmark-error(xmlns='http://www.w3.org/2000/svg' viewbox='0 0 52 52')
+                    circle.checkmark__circle__error(cx='26' cy='26' r='25' fill='none')
+                    path.checkmark__check(fill='none' d='M16 16 36 36 M36 16 16 36')
+            div(style="color: #e04125e7")= messages.error
+            span.close-alert-error.close-alert x
+
+

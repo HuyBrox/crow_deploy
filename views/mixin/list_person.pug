@@ -1,0 +1,15 @@
+mixin list_person(list_person)
+    if list_person
+        each val in list_person
+            .person
+                h3= val.name
+                p= val._id
+                .trang_thai(id=`status-${val._id}`)
+                    if val.status == 1
+                        p.online Online
+                    else
+                        p.offline Offline
+                if val._id != user.id
+                    button.call-button(type="button" data-receiver-id=val._id) Gọi Video
+    else
+        p Bạn chưa đăng nhập

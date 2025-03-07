@@ -1,0 +1,35 @@
+header.header
+  nav.navbar.navbar-expand-lg.navbar-light
+    .row.nav-header
+      .col-3.d-flex.align-items-start.justify-content-start
+        div.logo-container
+          a(href='/')
+            img.logo(src='/img/logo_crow.svg' alt='Logo' height='100' style='max-width: 100%; height: auto;')
+
+      .col-6.mt-4
+        button.navbar-toggler(type='button' data-toggle='collapse' data-target='#mainNav' aria-controls='mainNav' aria-expanded='false' aria-label='Toggle navigation')
+          span.navbar-toggler-icon
+        #mainNav.collapse.navbar-collapse
+          ul.navbar-nav.me-auto
+            li.nav-item.ms-3
+              a.nav-link(href='/') Trang chủ
+            li.nav-item.ms-3
+              a.nav-link(href='/course') Học tập
+            li.nav-item.ms-3
+              a.nav-link(href='/community') Cộng đồng
+            li.nav-item.ms-3
+              a.nav-link(href='/flashcards') Flashcards
+            li.nav-item.ms-3
+              a.nav-link(href='/about' target='_blank') Giới thiệu
+
+      .col-3.text-right.d-flex.align-items-start.justify-content-end.mt-4
+        if user == null
+          a.btn.btn-register(href='/register') Đăng ký
+          a.btn.btn-login(href='/login') Đăng nhập
+        else if user != null
+          .user-info.d-flex.align-items-center
+            a.mini-profile(href='/profile')
+              input.hidden.userId#currentUserI(type="hidden" value=user._id)
+              img(src=user.avatar alt='Avatar' width='40' height='40').avatar
+              span.username(style="margin-left: 10px;") #{user.username}
+            a.btn.btn-login(href='/logout') Đăng xuất

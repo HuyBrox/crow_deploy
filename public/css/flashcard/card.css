@@ -1,0 +1,516 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;700&display=swap");
+
+:root {
+  --primary-color: #8e44ad;
+  --background-color: #b8c6db;
+  --secondary-background-color: #f5f7fa;
+  --light-color: #fff;
+  --border-color: #aaa;
+}
+
+body {
+  /* background-image: linear-gradient(45deg, #93a5cf 0%, #e4efe9 100%); */
+  background-image: linear-gradient(to top, #ffe0a6 0%, white 100%);
+  font-family: "Poppins", sans-serif;
+  overflow: hidden;
+  margin: 0;
+}
+.container {
+  margin-top: 20px;
+  margin: 0 auto;
+  padding: 1.25rem;
+  position: relative;
+  background-color: #ffffff00;
+  width: 100%;
+  height: calc(100vh);
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+h1 {
+  color: #001227ee;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1.25rem;
+  text-align: center;
+  text-shadow: 3px 3px 2px rgba(7, 7, 7, 0.26);
+}
+h1 button {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  z-index: 2;
+}
+
+.btn {
+  cursor: pointer;
+
+  border: none;
+  border-radius: 0.625rem;
+  font-size: 0.875rem;
+  padding: 0.5rem 1rem;
+}
+.btn-custom {
+  color: #ffffff;
+  border-radius: 5px;
+  height: 37px;
+  width: 130px;
+  font-family: "Lato", sans-serif;
+  /* background: transparent; */
+  background: linear-gradient(90deg, #ffa946 0%, #ffc7a6 100%);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
+    7px 7px 20px 0px rgba(0, 0, 0, 0.1), 4px 4px 5px 0px rgba(0, 0, 0, 0.1);
+  outline: none;
+}
+.btn-small {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+}
+
+.btn-ghost {
+  border: 0;
+  background-color: transparent;
+}
+
+.btn-margin {
+  margin-top: 1.25rem;
+  width: 28.125rem;
+  max-width: 90%;
+}
+
+.btn-custom:hover {
+  /* background-color: var(--primary-color);*/
+  color: var(--light-color);
+  background: linear-gradient(90deg, #f09835 100%, #ffe8ce 0%);
+}
+
+.btn:focus,
+.navigation .nav-button:focus {
+  outline: none;
+}
+
+.box {
+  position: absolute;
+  bottom: 2rem;
+  left: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cards {
+  perspective: 1000px;
+  position: relative;
+  width: 31.25rem;
+  max-width: 90%;
+  height: 18.75rem;
+}
+
+.card {
+  background-color: var(--light-color);
+  border-radius: 25px;
+  position: absolute;
+  font-size: 1.5rem;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transform: translateX(50%) rotateY(-10deg);
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+.card.active {
+  cursor: pointer;
+  opacity: 1;
+  z-index: 10;
+  transform: translateX(0) rotateY(0deg);
+}
+
+.card.left {
+  transform: translateX(-50%) rotateY(10deg);
+}
+
+.inner-card {
+  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.3);
+  border-radius: 0.625rem;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.4s ease;
+}
+
+.card.show-answer .inner-card {
+  transform: rotateX(180deg);
+}
+
+.inner-card-front,
+.inner-card-back {
+  backface-visibility: hidden;
+  background-color: var(--light-color);
+  border-radius: 0.625rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.inner-card-front {
+  transform: rotateX(0deg);
+  z-index: 2;
+}
+
+.inner-card-back {
+  transform: rotateX(180deg);
+}
+
+.inner-card-front::after,
+.inner-card-back::after {
+  content: "\f021  Flip";
+  font-family: "Font Awesome 5 Free", "Poppins", sans-serif;
+  position: absolute;
+  top: 0.625rem;
+  right: 0.625rem;
+  font-weight: bold;
+  font-size: 1rem;
+  color: var(--background-color);
+}
+
+.navigation {
+  display: flex;
+  margin: 1.25rem 0;
+}
+
+.navigation .nav-button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.navigation .nav-button:hover {
+  transform: scale(1.2);
+}
+
+.navigation p {
+  margin: 0 1.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.add-container {
+  background-color: rgb(255, 255, 255);
+  border-top: 2px solid var(--border-color);
+  display: flex;
+  border-radius: 25px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.625rem 0;
+  position: absolute;
+  overflow: hidden;
+  /* hiển thị thanh cuộn: nếu cần:*/
+  overflow-y: auto;
+  /* css thanh cuộn: */
+  scrollbar-width: thin;
+  scrollbar-color: rgb(255, 240, 220) rgb(255, 176, 103);
+  top: 150px;
+  bottom: 0;
+  width: 90%;
+  padding: 20px;
+  height: 70vh;
+  opacity: 0;
+  z-index: -1;
+  transition: all 0.3s ease;
+}
+
+
+.add-container h3 {
+  margin: 0.625rem 0;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-group label {
+  display: block;
+  margin: 1.25rem 0 0.625rem;
+  font-size: 1.5rem;
+  font-weight: 600px;
+  color: rgb(139, 166, 255);
+}
+
+.form-group textarea {
+  border: 1px solid var(--border-color);
+  border-radius: 0.625rem;
+  font-size: 1rem;
+  padding: 0.75rem;
+  width: 31.25rem;
+  max-width: 90%;
+}
+#random {
+  margin-left: 20px;
+}
+#show {
+  margin-top: 100px;
+}
+
+@property --gradient-angle {
+  syntax: "<angle>";
+  initial-value: 0turn;
+  inherits: false;
+}
+.voice-btn {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 1.25rem;
+  padding: 0.625rem;
+  border: none;
+  background-color: var(--light-color);
+  border-radius: 0.625rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.voice-btn i {
+  font-size: 20px;
+  color: #0943726b;
+  text-shadow: 2px 2px 2px rgba(255, 186, 129, 0.26);
+}
+/* animation - huy */
+.card-animation {
+  animation: 2s gradient-angle infinite linear;
+  border: 4px solid transparent;
+
+  background-image: linear-gradient(#ffffff, #ffffff),
+    conic-gradient(
+      from var(--gradient-angle),
+      #584827 0%,
+      #c7a03c 37%,
+      #f9de90 30%,
+      #c7a03c 33%,
+      #584827 40%,
+      #584827 50%,
+      #c7a03c 77%,
+      #f9de90 80%,
+      #c7a03c 83%,
+      #584827 90%
+    );
+  background-clip: padding-box, border-box;
+  background-origin: padding-box, border-box;
+}
+
+@keyframes gradient-angle {
+  to {
+    --gradient-angle: 1turn;
+  }
+}
+/* end animation */
+.btn-small {
+  border-radius: 9999px;
+  width: 20px;
+  height: 20px;
+}
+
+#alert {
+  color: rgb(35, 223, 75);
+  font-size: 20px;
+  font-weight: 500;
+  text-align: center;
+}
+.card p {
+  margin: 0;
+  padding: 1.25rem;
+  font-weight: 510;
+
+  color: rgba(0, 57, 110, 0.986);
+}
+/* css nút AI */
+.button-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  width: 100%;
+  max-width: 450px;
+  margin-bottom: 20px;
+}
+
+.btn.btn-margin.btn-custom {
+  margin: 0; /* Loại bỏ margin mặc định nếu có */
+}
+
+.language-select {
+  width: 200px; /* Độ rộng của select box */
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  font-size: 14px;
+}
+
+/* Tùy chỉnh Select2
+.select2-container .select2-selection--single {
+  height: 38px;
+  display: flex;
+  align-items: center;
+}
+
+.select2-container .select2-selection__rendered {
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+}
+
+.select2-container .select2-selection__arrow {
+  height: 38px;
+}
+
+.flag-img {
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+} */
+/* Tùy chỉnh Select2 */
+.select2-container .select2-selection--single {
+  height: 38px;
+  display: flex;
+  align-items: center;
+}
+
+.select2-container .select2-selection__rendered {
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+}
+
+.select2-container .select2-selection__arrow {
+  height: 38px;
+}
+
+.flag-img {
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+}
+
+/* Tùy chỉnh thanh cuộn cho dropdown của Select2 */
+.select2-results__options {
+  /* Thanh cuộn siêu mỏng, siêu mờ nhưng vẫn thấy */
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: rgba(0, 0, 0, 0.2) transparent; /* Firefox: màu thanh cuộn mờ */
+}
+
+.select2-results__options::-webkit-scrollbar {
+  width: 2.5px;
+  background: transparent;
+}
+
+.select2-results__options::-webkit-scrollbar-track {
+  background: rgba(255, 244, 237, 0.397); /* Màu nền thanh cuộn */
+}
+
+.select2-results__options::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.055); /* Màu thanh cuộn mờ */
+  border-radius: 10px; /* Bo tròn thanh cuộn */
+}
+
+.select2-results__options::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.651);
+}
+
+/* Tùy chỉnh thanh tìm kiếm của Select2 */
+.select2-container--default .select2-search--dropdown .select2-search__field {
+  border-radius: 20px;
+  border: 1px solid #ddd;
+  padding: 6px 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  outline: none;
+  height: 23px;
+  font-size: 12px;
+}
+
+.select2-container--default
+  .select2-search--dropdown
+  .select2-search__field:focus {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  border-color: #aaa;
+}
+/* learn btn */
+#learn {
+  position: absolute;
+  bottom: 30px;
+  right: 20px;
+  width: 140px;
+  background-image: linear-gradient(90deg, #4696ff 0%, #a6cdff 100%);
+}
+/* css choice ẩn */
+.choise-container {
+  position: absolute;
+  margin: auto;
+  width: 100%;
+  max-width: 400px;
+  height: 100%;
+  max-height: 180px;
+  display: flex;
+  align-items: center;
+  background-image: linear-gradient(90deg, #4696ff 0%, #a6cdff 100%);
+  justify-content: space-evenly;
+  border-radius: 25px 0 25px 25px;
+  border: none;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+
+  flex-direction: row-reverse;
+  /* ẩn */
+  opacity: 0;
+  z-index: -1;
+}
+.closex {
+  position: absolute;
+  top: -10px;
+  right: 0;
+  font-size: 15px;
+  cursor: pointer;
+  background-color: rgba(255, 253, 253, 0.726);
+  border-radius: 99999999px;
+  border: none;
+  padding: 2px;
+  width: 30px;
+  height: 30px;
+  transform: translateY(-100%);
+  transform: translateX(50%);
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.closex:hover {
+  background-color: rgb(255, 253, 253);
+  font-weight: 550;
+  font-size: 16px;
+  color: rgb(255, 82, 82);
+}
+.choise-container .btn-custom {
+  width: 150px;
+  height: 40px;
+}
+.show {
+  opacity: 1;
+  z-index: 2;
+}

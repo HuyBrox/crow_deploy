@@ -1,0 +1,17 @@
+extends ../../layout/default.pug
+include ../../mixin/alert.pug
+
+block main
+    .call-container
+        h2 Đang gọi #{receiver.fullname}...
+        .video-container
+            video#localVideo(autoplay muted)
+            video#remoteVideo(autoplay)
+
+        button#endCall Kết thúc cuộc gọi
+
+        input#receiverId(type="hidden" value=receiver._id)
+        input#peerId(type="hidden" value=peerId)
+
+block script
+    script(src="/js/call.js")

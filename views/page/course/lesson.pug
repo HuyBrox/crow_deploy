@@ -1,0 +1,88 @@
+extends ../../layout/default.pug
+include ../../mixin/alert.pug
+//- block script
+//-   script(src="/js/course/lesson.js")
+block style
+  link(rel="stylesheet" href="/css/lesson.css")
+block main
+  .container
+    .main-content
+      if lesson.type === "video"
+        .video-container
+          video#lesson-video(controls src=lesson.videoUrl width="100%")
+        .lesson-content
+          h2#lesson-title= lesson.title
+          p#lesson-description= lesson.content
+          ul
+            li Fanpage:
+              a(href="#") https://www.facebook.com/f8vnofficial
+            li Group:
+              a(href="#") https://www.facebook.com/groups/649972919142215
+            li Youtube:
+              a(href="#") https://www.youtube.com/F8VNOfficial
+            li Hữu Kỳ:
+              a(href="#") https://www.facebook.com/sondnf8
+      else if lesson.type === 'task'
+        .task-container
+          input#sheetName(type="hidden" value=lesson.jsonTask)
+          .quiz_wrapper
+            .quiz_header
+              .quiz_timer
+                i.fa-regular.fa-clock
+                .quiz_timer_text
+                  span Time remaining
+                  p#timer 15:00
+              button#quiz_submit SUBMIT
+            .quiz_container
+              .quiz_question
+                h5 Question 1 of 10
+                p#quiz_title
+                ul
+                  li
+                    span A.
+                    span.quiz_answer_item
+                  li
+                    span B.
+                    span.quiz_answer_item
+                  li
+                    span C.
+                    span.quiz_answer_item
+                  li
+                    span D.
+                    span.quiz_answer_item
+              .quiz_progress
+                svg
+                  circle(r='50')
+                  circle#progress(r='50')
+                span#progress_text 0/10
+            .quiz_numbers
+              button#quiz_prev Prev
+              ul
+              button#quiz_next Next
+    .sidebar
+      h3 Nội dung khóa học
+      ul.lesson-list
+        each lesson, index in course.lessons
+          li(class=(lesson._id.toString() === lessonId ? "active" : ""))
+            a.lesson-link(href=`/course/${course._id}/lesson/${lesson._id}` data-lesson-id=lesson._id)= `${index + 1}. ${lesson.title}`
+
+block script2
+  script(src="/js/lesson.js")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

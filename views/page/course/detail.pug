@@ -1,0 +1,51 @@
+extends ../../layout/default
+include ../../mixin/alert
+block style
+    link(rel="stylesheet" href="/css/detail.css")
+block main
+    .container
+        .flex
+            .main
+                nav
+                    if (course && course.lessons && course.lessons.length > 0)
+                        a(href=`/course/${course._id}/lesson/${course.lessons[0]._id}`)
+                            button.active Vào học
+                    else
+                        a(href=`/course`).color-red
+                            | Khóa học chưa hoàn thành nội dung(quay lại trang khóa học)
+                    button Chương trình giảng dạy
+                    button Ôn tập
+                h1 #{course.name}
+                img(src="https://storage.googleapis.com/a1aa/image/rY8-dpGHdDsUppwWlaCwulaJwg_BUNjB3Ds3K5r9-cY.jpg" alt="A person holding books and smiling in front of a blue background")
+                p #{course.description}
+
+                h2 Bạn sẽ học được gì?
+                ul
+                    - for (let i = 0; i < 8; i++)
+                        li
+                            i.fas.fa-check-circle
+                            |  Nội dung học tập mẫu
+
+                h2 Để lại phản hồi
+                p Địa chỉ email của bạn sẽ không được công bố. Các trường bắt buộc được đánh dấu *
+                form
+                    textarea(placeholder="Enter your comment here..." rows="4")
+                    .row
+                        input(type="text" placeholder="Name")
+                        input(type="email" placeholder="Email")
+                        input(type="url" placeholder="Website")
+                    .checkbox
+                        input#save-info(type="checkbox")
+                        label(for="save-info") Lưu tên, email và trang web của tôi trong trình duyệt này cho lần bình luận tiếp theo của tôi.
+                    button(type="submit") Đăng bình luận
+
+            .sidebar
+                h2 Các khóa học trả lại
+                ul
+                    - for (let i = 0; i < 4; i++)
+                        li
+                            img(src="https://storage.googleapis.com/a1aa/image/R0qmC946yqYB-YSd1VCl6B362_mvsQlWjZ_WY49Vy1k.jpg" alt="Course thumbnail")
+                            div
+                                p.price Học Địa lý theo cách thú vị & hấp dẫn
+                                p.old-price $45.00
+                                p.price $40.00

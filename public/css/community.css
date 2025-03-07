@@ -1,0 +1,496 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+  
+.container {
+  width: 100%;
+  margin: auto;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+  /* phần dăng bài */
+
+.block-create-post {
+  background: white;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.block-create-post .user-avatar {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.block-create-post .user-avatar img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.block-create-post .post-input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 20px;
+  border: 1px solid #ddd;
+  background: #f0f2f5;
+  outline: none;
+  cursor: pointer;
+}
+
+.block-create-post .post-options {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #ddd;
+}
+
+.block-create-post .option {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 10px 20px;
+  border-radius: 8px;
+}
+
+.block-create-post .option:hover {
+  background: #e9e0e0b9;
+}
+
+.block-create-post .option img {
+  width: 24px;
+  height: 24px;
+  margin-right: 5px;
+}
+
+.post-header {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 14px;
+  color: gray;
+  margin-top : 50px;
+}
+
+.category {
+  color: #007bff;
+  font-weight: bold;
+  text-decoration: none;
+}
+/* popup dăng bài */
+
+/* Ẩn popup mặc định */
+.post-popup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Nội dung của popup */
+.popup-content {
+  background: white;
+  width: 900px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); 
+  text-align: center;
+  animation: fadeIn 0.3s ease-in-out;
+  border: 3px solid #d47843;
+}
+
+/* Nút đóng popup */
+.popup-content h2 {
+  color: #c58338; 
+  margin-bottom: 15px;
+}
+
+.popup-content .form-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.popup-content label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.popup-content input,
+.popup-content textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.popup-content input[type="file"] {
+  border: none;
+}
+
+/* Nút tat mo */
+.popup-content .form-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.popup-content button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+/* Nut dang */
+.popup-content button[type="submit"] {
+  background-color: #007bff;
+  color: white;
+}
+
+/* Nút Hủy */
+.popup-content button[type="button"] {
+  background-color: #ff4d4d;
+  color: white;
+}
+
+.popup-content button[type="button"]:hover {
+  background-color: #cc0000;
+}
+
+/* popup edit  */
+.edit-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.edit-popup .popup-content {
+  background: white;
+  padding: 30px; 
+  border-radius: 8px;
+  width: 90%;
+  max-width: 800px; 
+  min-height: 400px; 
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.edit-popup .form-group {
+  margin-bottom: 20px;
+}
+
+.edit-popup .form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  font-size: 1.1em; 
+}
+
+.edit-popup .form-group input,
+.edit-popup .form-group textarea {
+  width: 100%;
+  padding: 12px; 
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1em; 
+}
+
+.edit-popup .form-group textarea {
+  min-height: 150px; 
+}
+
+.edit-popup .form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px; 
+  margin-top: 20px; 
+}
+
+.edit-popup .cancel-btn,
+.edit-popup button[type="submit"] {
+  padding: 10px 20px; 
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1em; 
+}
+
+.edit-popup .cancel-btn {
+  background: #f0f0f0;
+}
+
+.edit-popup button[type="submit"] {
+  background: #007bff;
+  color: white;
+}
+
+
+/* Noi dung bai */
+.post-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+
+/* cap noi dung img  */
+.left {
+  background: #fdf7f2;
+  padding: 15px;
+  border-radius: 10px;
+  flex: 1;
+  width: 100%; 
+  height: 650px;
+}
+
+.left h2 {
+  font-size: 30px;
+  font-weight: 600;
+  color: #010101;
+}
+
+.left p {
+  font-size: 16px;
+  color: #717171;
+}
+
+.post-image {
+  width: 100%; 
+  height: 540px; 
+  overflow: hidden; 
+  border-radius: 10px; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.post-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  border-radius: 10px;
+}
+
+/* binh luan , avata  */
+
+.right {
+  flex: 1;
+  background: #fdf7f2;
+  padding: 15px;
+  border-radius: 10px;
+  width: 100%; 
+  height: 650px; 
+  position: relative; 
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* nut tuy chon
+ */
+
+/* Định dạng nút tùy chọn */
+.post-options-menu {
+  position: absolute;
+  top: 10px; 
+  right: 10px; 
+}
+
+.options-btn {
+  background: none; 
+  border: none; 
+  cursor: pointer;
+  padding: 5px; 
+  display: flex; 
+  align-items: center;
+  justify-content: center;
+}
+
+.options-dropdown {
+  position: absolute;
+  right: 0;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  z-index: 1000;
+}
+.post-options-menu img {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.edit-btn, .delete-btn {
+  display: block;
+  width: 100px;
+  padding: 8px 12px;
+  border: none;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+}
+
+.edit-btn:hover {
+  background: #f0f0f0;
+}
+
+.delete-btn:hover {
+  background: #f0f0f0;
+}
+ 
+/* like */
+.avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+
+.likes {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: 12px;
+}
+
+.likes button {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  transform: scale(1.2);
+}
+
+.likes button:hover {
+  transform: scale(1.5);
+  color: red;
+}
+
+
+/* Phần Bình luận */
+.comments {
+  max-height: 500px; 
+  overflow-y: auto;
+  padding: 10px;
+  border-radius: 8px;
+  background: #fdf7f2;
+}
+
+.comment {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  word-wrap: break-word; 
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: gray;
+}
+
+.user-info img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+/* Phần  viet bình luận */
+
+.comment-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border-top: 1px solid #ddd;
+  background: #fdf7f2;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+.comment-box .avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.comment-box .comment-text {
+  flex: 1;
+  padding: 10px 15px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  font-size: 14px;
+  outline: none;
+}
+
+.comment-box .comment-text:focus {
+  border-color: #007bff;
+}
+
+.comment-box .comment-submit {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.comment-box .comment-submit:hover {
+  background-color: #0056b3;
+}
+
+/* Responsive  */
+@media (max-width: 768px) {
+  .post-content {
+      flex-direction: column;
+  }
+  .left, .right {
+      width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .post-header {
+      flex-direction: column;
+      font-size: 12px;
+  }
+  .reply {
+      font-size: 12px;
+  }
+}

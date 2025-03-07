@@ -1,0 +1,111 @@
+//- extends ../../layout/default.pug
+//- block style
+//-     link(rel="stylesheet" href="/css/chat.css")
+//- block main
+//-     .chat-container
+//-         .chat-mess-box
+//-             // Sidebar - Danh sách đoạn chat
+//-             .chat-sidebar
+//-                 .chat-header
+//-                     strong Đoạn chat
+//-                     button 🔍
+//-                 input.chat-search-box(type="text" placeholder="Tìm kiếm trên Messenger...")
+
+//-                 .chat-list
+//-                     each contact in [1,2,3,4,5,6]
+//-                         .chat-item
+//-                             img(src="avatar.jpg" alt="Avatar")
+//-                             .chat-info
+//-                                 strong Tên bạn bè
+//-                                 span Đã gửi tin nhắn...
+//-             // Chat Area - Nội dung tin nhắn
+//-             .chat-area
+//-                 // Header
+//-                 .chat-topbar
+//-                     img(src="avatar.jpg" alt="Avatar")
+//-                     .chat-info
+//-                         strong #{receiver.fullname}
+//-                     .chat-actions
+//-                         button.call-button(type="button" data-receiver-id=receiver._id) 📞
+//-                         button 💬
+//-                         button ⚙️
+
+//-                 // Chat Box
+//-                 .chat-box
+//-                     .chat-message.left
+//-                         img(src="avatar.jpg" alt="Avatar")
+//-                         .chat-text Gửi số tk b
+
+//-                     .chat-message.right
+//-                         .chat-text 0359811642
+
+//-                     .chat-message.left
+//-                         img(src="avatar.jpg" alt="Avatar")
+//-                         .chat-text Tokyo lâu lâu ms có tuyết b
+
+//-                     .chat-message.right
+//-                         .chat-text Ok
+
+//-                 // Input Box
+//-                 .chat-input
+//-                     button 📷
+//-                     button GIF
+//-                     input.chat-text-input(type="text" placeholder="Aa")
+//-                     button 📨
+extends ../../layout/default.pug
+
+block script
+    script(src="/js/controls/chat_controls.js" type="module")
+
+block style
+    link(rel="stylesheet" href="/css/chat.css")
+
+block main
+    // Ta đính kèm data của user và receiver vào container để dùng ở client
+    .chat-container(data-current-user-id=user._id data-receiver-id=receiver._id data-receiver-avatar=receiver.avatar)
+        .chat-mess-box
+            // Sidebar - Danh sách đoạn chat
+            .chat-sidebar
+                .chat-header
+                    strong Đoạn chat
+                    button(type="button") 🔍
+                input.chat-search-box(type="text" placeholder="Tìm kiếm trên Messenger...")
+                .chat-list
+                    // Nếu có danh sách bạn bè (contacts) thì lặp theo mảng contacts, nếu không thì bạn giữ cứng
+                    each contact in (contacts || [])
+                        .chat-item
+                            img(src=contact.avatar alt="Avatar")
+                            .chat-info
+                                strong= contact.fullname
+                                span= contact.lastMessage || "Đã gửi tin nhắn..."
+
+            // Chat Area - Nội dung tin nhắn
+            .chat-area
+                // Header
+                .chat-topbar
+                    img(src=receiver.avatar alt="Avatar")
+                    .chat-info
+                        strong= receiver.fullname
+                    .chat-actions
+                        button.call-button(type="button" data-receiver-id=receiver._id) 📞
+                        button(type="button") 💬
+                        button(type="button") ⚙️
+
+                // Chat Box - Render các tin nhắn trong conversation
+                .chat-box
+                    each msg in conversation.messages
+                        if(msg)
+                            if msg.senderId.toString() === user._id.toString()
+                                .chat-message.right
+                                    .chat-text= msg.message
+                            else
+                                .chat-message.left
+                                    img(src=receiver.avatar alt="Avatar")
+                                    .chat-text= msg.message
+
+                // Input Box - Nhập tin nhắn mới
+                .chat-input
+                    button(type="button") 📷
+                    button(type="button") GIF
+                    input.chat-text-input(type="text" placeholder="Aa...")
+                    button.send-button(type="button") 📨

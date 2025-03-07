@@ -1,0 +1,17 @@
+extends ../../layout/default.pug
+block script
+    script(src="https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js")
+
+block style
+    link(rel="stylesheet" href="/css/call.css")
+block main
+    .video-container
+        .video-wrapper
+            video#localVideo(autoplay muted)
+            video#remoteVideo(autoplay)
+        .controls
+            button#toggleMic 🔇 Tắt Mic
+            button#toggleVideo 📹 Tắt Video
+            button#endCall ❌ Kết thúc
+block script2
+    script(src="/js/call/call_controls.js")

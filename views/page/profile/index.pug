@@ -1,0 +1,48 @@
+extends ../../layout/default.pug
+include ../../mixin/alert.pug
+
+block style
+  link(rel='stylesheet', href='/css/profile.css')
+
+block main
+  .container
+    input.hidden(type='hidden', id='user', value=user)
+    .profile
+      .profile-avatar
+        img(src=user.avatar || '/img/default-avatar.png', alt='Avatar')
+      .profile-info
+        h2 Tên: #{user.fullname || 'Chưa có thông tin'}
+        p Username: #{user.username || 'Không có username'}      
+        p ID: #{user._id || 'Không có ID'}
+        p Email: #{user.email || 'Không có email'}
+        .profile-flag
+          p Quốc gia: #{user.nationality || 'Không rõ'}
+          img#quocKy
+        .edit 
+          button#saveProfile Chỉnh sửa
+    .profile-stats
+      .stat
+        p.stat-title Bài đăng
+        p.stat-value #{user.posts || 0}
+      .stat
+        p.stat-title Thích bài
+        p.stat-value #{user.likes || 0}
+    .activity
+      h3 Hoạt động gần đây
+      p.no-activity #{user.recentActivity || 'Kabbbabbb'}
+    .courses
+        h3 Các khóa học đã tham gia
+        .course-list
+            if courses && courses.length
+              each course in courses
+                .course-a
+                  .course-image
+                    img(src="/img/course-1.png" alt=course.name) 
+                  .course-info
+                    h4 #{course.name}
+                    p #{course.description}
+            else
+              p Chưa tham gia khóa học nào.
+block script2
+  script(src='/js/profile.js')
+      

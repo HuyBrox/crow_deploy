@@ -1,0 +1,693 @@
+mixin key-board()
+    .virtual-keyboard-container
+        button.keyboard-toggle-btn#keyboardToggleBtn
+            i.fas.fa-keyboard
+        .language-selector#languageSelector
+            button.language-btn(data-lang="japanese-hiragana") Hiragana
+            button.language-btn(data-lang="japanese-katakana") Katakana
+            button.language-btn(data-lang="korean") Korean
+            button.language-btn(data-lang="chinese") Chinese
+        .virtual-keyboard#virtualKeyboard(draggable="true")
+            .keyboard-header
+                span.keyboard-title Japanese - Hiragana
+                .keyboard-controls
+                    button.keyboard-size-btn#keyboardDecrease
+                        i.fas.fa-search-minus
+                    button.keyboard-size-btn#keyboardIncrease
+                        i.fas.fa-search-plus
+                    button.keyboard-close
+                        i.fas.fa-times
+            .keyboard-content#keyboardContent
+                // Different keyboard layouts will be inserted here dynamically
+
+    style.
+        .virtual-keyboard-container {
+            position: relative;
+            z-index: 9999;
+        }
+
+        .keyboard-toggle-btn {
+            position: fixed;
+            right: 20px;
+            bottom: 100px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .keyboard-toggle-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .language-selector {
+            position: fixed;
+            right: 80px;
+            bottom: 20px;
+            display: none;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .language-btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: none;
+            background-color: #f1f1f1;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .language-btn:hover {
+            background-color: #e0e0e0;
+        }
+
+        .virtual-keyboard {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            width: 600px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+            display: none;
+            overflow: hidden;
+            cursor: move;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .keyboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 15px;
+            background-color: #e0e0e0;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .keyboard-title {
+            font-weight: bold;
+        }
+
+        .keyboard-controls {
+            display: flex;
+            align-items: center;
+        }
+
+        .keyboard-size-btn,
+        .keyboard-close {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            margin-left: 10px;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+        }
+
+        .keyboard-size-btn:hover,
+        .keyboard-close:hover {
+            background-color: #ccc;
+        }
+
+        .keyboard-content {
+            overflow-y: auto;
+            max-height: 400px;
+        }
+
+        .resize-handle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: transparent;
+            cursor: nwse-resize;
+        }
+
+        .resize-handle.top-left {
+            top: 0;
+            left: 0;
+            cursor: nwse-resize;
+        }
+
+        .resize-handle.top-right {
+            top: 0;
+            right: 0;
+            cursor: nesw-resize;
+        }
+
+        .resize-handle.bottom-left {
+            bottom: 0;
+            left: 0;
+            cursor: nesw-resize;
+        }
+
+        .resize-handle.bottom-right {
+            bottom: 0;
+            right: 0;
+            cursor: nwse-resize;
+        }
+
+        .keyboard-layout {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed;
+        }
+
+        .key {
+            text-align: center;
+            padding: 12px 5px;
+            border: 1px solid #ddd;
+            background-color: white;
+            cursor: pointer;
+            transition: background-color 0.1s;
+            user-select: none;
+            font-size: 16px;
+        }
+
+        .key:hover {
+            background-color: #f0f0f0;
+        }
+
+        .key:active {
+            background-color: #e0e0e0;
+        }
+
+        .key.space {
+            width: auto;
+        }
+
+        .key.function {
+            background-color: #ff9800;
+            color: white;
+        }
+
+        .key.special {
+            background-color: #f1f1f1;
+        }
+
+    script.
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elements
+            const toggleBtn = document.getElementById('keyboardToggleBtn');
+            const langSelector = document.getElementById('languageSelector');
+            const keyboard = document.getElementById('virtualKeyboard');
+            const keyboardTitle = document.querySelector('.keyboard-title');
+            const closeBtn = document.querySelector('.keyboard-close');
+            const increaseBtn = document.getElementById('keyboardIncrease');
+            const decreaseBtn = document.getElementById('keyboardDecrease');
+            const keyboardContent = document.getElementById('keyboardContent');
+            const langButtons = document.querySelectorAll('.language-btn');
+
+            // Current active input element
+            let activeInput = null;
+
+            // For backspace long press
+            let backspaceInterval = null;
+            let backspaceDelay = 500; // Initial delay in ms
+            let backspaceSpeed = 50;  // Interval for continuous deletion in ms
+
+            // Current keyboard size and scale factor
+            let currentScale = 1;
+            const scaleStep = 0.1;
+            const minScale = 0.7;
+            const maxScale = 1.5;
+
+            // Keyboard layouts for different languages
+            const layouts = {
+                'japanese-hiragana': {
+                    title: 'Japanese - Hiragana',
+                    layout: [
+                        // Main hiragana layout
+                        { row: ['あ', 'い', 'う', 'え', 'お', 'や', 'ゆ', 'よ', 'わ', 'を', 'ん'] },
+                        { row: ['か', 'き', 'く', 'け', 'こ', 'が', 'ぎ', 'ぐ', 'げ', 'ご'] },
+                        { row: ['さ', 'し', 'す', 'せ', 'そ', 'ざ', 'じ', 'ず', 'ぜ', 'ぞ'] },
+                        { row: ['た', 'ち', 'つ', 'て', 'と', 'だ', 'ぢ', 'づ', 'で', 'ど'] },
+                        { row: ['な', 'に', 'ぬ', 'ね', 'の', 'は', 'ひ', 'ふ', 'へ', 'ほ'] },
+                        { row: ['ま', 'み', 'む', 'め', 'も', 'ば', 'び', 'ぶ', 'べ', 'ぼ'] },
+                        { row: ['ら', 'り', 'る', 'れ', 'ろ', 'ぱ', 'ぴ', 'ぷ', 'ぺ', 'ぽ'] },
+                        { row: ['ゃ', 'ゅ', 'ょ', 'っ', '・', '、', '。', 'ます', '？', '⌫'], special: [null, null, null, null, null, null, null, null, null, 'backspace'] },
+                        { row: ['ABC', '123', ' ', '.com', '←', '→', '↵'], colspan: [1, 1, 5, 1, 1, 1, 1], special: ['latin', 'numbers', 'space', null, 'left', 'right', 'enter'] }
+                    ]
+                },
+                'japanese-katakana': {
+                    title: 'Japanese - Katakana',
+                    layout: [
+                        // Main katakana layout
+                        { row: ['ア', 'イ', 'ウ', 'エ', 'オ', 'ヤ', 'ユ', 'ヨ', 'ワ', 'ヲ', 'ン'] },
+                        { row: ['カ', 'キ', 'ク', 'ケ', 'コ', 'ガ', 'ギ', 'グ', 'ゲ', 'ゴ'] },
+                        { row: ['サ', 'シ', 'ス', 'セ', 'ソ', 'ザ', 'ジ', 'ズ', 'ゼ', 'ゾ'] },
+                        { row: ['タ', 'チ', 'ツ', 'テ', 'ト', 'ダ', 'ヂ', 'ヅ', 'デ', 'ド'] },
+                        { row: ['ナ', 'ニ', 'ヌ', 'ネ', 'ノ', 'ハ', 'ヒ', 'フ', 'ヘ', 'ホ'] },
+                        { row: ['マ', 'ミ', 'ム', 'メ', 'モ', 'バ', 'ビ', 'ブ', 'ベ', 'ボ'] },
+                        { row: ['ラ', 'リ', 'ル', 'レ', 'ロ', 'パ', 'ピ', 'プ', 'ペ', 'ポ'] },
+                        { row: ['ャ', 'ュ', 'ョ', 'ッ', '・', '、', '。', 'ー', '？', '⌫'], special: [null, null, null, null, null, null, null, null, null, 'backspace'] },
+                        { row: ['ABC', '123', ' ', '.com', '←', '→', '↵'], colspan: [1, 1, 5, 1, 1, 1, 1], special: ['latin', 'numbers', 'space', null, 'left', 'right', 'enter'] }
+                    ]
+                },
+                'korean': {
+                    title: 'Korean',
+                    layout: [
+                        // Main Korean layout - consonants
+                        { row: ['ㄱ', 'ㄲ', 'ㄴ', 'ㄷ', 'ㄸ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅃ', 'ㅅ', 'ㅆ'] },
+                        { row: ['ㅇ', 'ㅈ', 'ㅉ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ'] },
+                        // Vowels
+                        { row: ['ㅏ', 'ㅐ', 'ㅑ', 'ㅒ', 'ㅓ', 'ㅔ', 'ㅕ', 'ㅖ', 'ㅗ', 'ㅘ', 'ㅙ'] },
+                        { row: ['ㅚ', 'ㅛ', 'ㅜ', 'ㅝ', 'ㅞ', 'ㅟ', 'ㅠ', 'ㅡ', 'ㅢ', 'ㅣ'] },
+                        // Common compounds
+                        { row: ['가', '나', '다', '라', '마', '바', '사', '아', '자', '차', '카'] },
+                        { row: ['타', '파', '하', '강', '경', '고', '구', '기', '김', '나', '노'] },
+                        // Special characters and controls
+                        { row: ['~', '!', '@', '#', '$', '%', '^', '&', '*', '⌫'], special: [null, null, null, null, null, null, null, null, null, 'backspace'] },
+                        { row: ['ABC', '123', ' ', '.com', '←', '→', '↵'], colspan: [1, 1, 5, 1, 1, 1, 1], special: ['latin', 'numbers', 'space', null, 'left', 'right', 'enter'] }
+                    ]
+                },
+                'chinese': {
+                    title: 'Chinese',
+                    layout: [
+                        // Main Chinese layout - Bopomofo
+                        { row: ['ㄅ', 'ㄆ', 'ㄇ', 'ㄈ', 'ㄉ', 'ㄊ', 'ㄋ', 'ㄌ', 'ㄍ', 'ㄎ', 'ㄏ'] },
+                        { row: ['ㄐ', 'ㄑ', 'ㄒ', 'ㄓ', 'ㄔ', 'ㄕ', 'ㄖ', 'ㄗ', 'ㄘ', 'ㄙ'] },
+                        { row: ['ㄚ', 'ㄛ', 'ㄜ', 'ㄝ', 'ㄞ', 'ㄟ', 'ㄠ', 'ㄡ', 'ㄢ', 'ㄣ'] },
+                        { row: ['ㄤ', 'ㄥ', 'ㄦ', 'ㄧ', 'ㄨ', 'ㄩ', 'ˊ', 'ˇ', 'ˋ', '˙'] },
+                        // Common characters
+                        { row: ['我', '你', '他', '她', '的', '是', '不', '了', '在', '有', '和'] },
+                        { row: ['人', '中', '国', '个', '会', '对', '生', '能', '上', '下', '大'] },
+                        // Special characters and controls
+                        { row: ['～', '！', '＠', '＃', '￥', '％', '…', '＆', '（', '）', '⌫'], special: [null, null, null, null, null, null, null, null, null, null, 'backspace'] },
+                        { row: ['ABC', '123', ' ', '.com', '←', '→', '↵'], colspan: [1, 1, 5, 1, 1, 1, 1], special: ['latin', 'numbers', 'space', null, 'left', 'right', 'enter'] }
+                    ]
+                },
+                'latin': {
+                    title: 'Latin (ABC)',
+                    layout: [
+                        { row: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'] },
+                        { row: ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'] },
+                        { row: ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'] },
+                        { row: ['⇧', 'z', 'x', 'c', 'v', 'b', 'n', 'm', '⌫'], special: ['shift', null, null, null, null, null, null, null, 'backspace'] },
+                        { row: ['あ/ア', '한', '中', '123', ' ', '.com', '.', '↵'], colspan: [1, 1, 1, 1, 4, 1, 1, 1], special: ['japanese-hiragana', 'korean', 'chinese', 'numbers', 'space', null, null, 'enter'] }
+                    ]
+                },
+                'numbers': {
+                    title: 'Numbers & Symbols',
+                    layout: [
+                        { row: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'] },
+                        { row: ['-', '/', ':', ';', '(', ')', '$', '&', '@', '"'] },
+                        { row: ['#+=', '.', ',', '?', '!', "'", '⌫'], colspan: [1, 1, 1, 1, 1, 1, 2], special: ['symbols', null, null, null, null, null, 'backspace'] },
+                        { row: ['ABC', 'あ/ア', '한', '中', ' ', '←', '→', '↵'], colspan: [1, 1, 1, 1, 4, 1, 1, 1], special: ['latin', 'japanese-hiragana', 'korean', 'chinese', 'space', 'left', 'right', 'enter'] }
+                    ]
+                },
+                'symbols': {
+                    title: 'Symbols',
+                    layout: [
+                        { row: ['[', ']', '{', '}', '#', '%', '^', '*', '+', '='] },
+                        { row: ['_', '\\', '|', '~', '<', '>', '€', '£', '¥', '•'] },
+                        { row: ['123', '.', ',', '?', '!', "'", '⌫'], colspan: [1, 1, 1, 1, 1, 1, 2], special: ['numbers', null, null, null, null, null, 'backspace'] },
+                        { row: ['ABC', 'あ/ア', '한', '中', ' ', '←', '→', '↵'], colspan: [1, 1, 1, 1, 4, 1, 1, 1], special: ['latin', 'japanese-hiragana', 'korean', 'chinese', 'space', 'left', 'right', 'enter'] }
+                    ]
+                }
+            };
+
+            // Set current language
+            let currentLang = 'japanese-hiragana';
+
+            // Toggle language selector
+            toggleBtn.addEventListener('click', function() {
+                if (langSelector.style.display === 'block') {
+                    langSelector.style.display = 'none';
+                } else {
+                    langSelector.style.display = 'block';
+                }
+            });
+
+            // Language selection
+            langButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    currentLang = this.dataset.lang;
+                    keyboardTitle.textContent = layouts[currentLang].title;
+                    renderKeyboard(currentLang);
+                    langSelector.style.display = 'none';
+                    keyboard.style.display = 'block';
+                });
+            });
+
+            // Close keyboard
+            closeBtn.addEventListener('click', function() {
+                keyboard.style.display = 'none';
+            });
+
+            // Size controls
+            increaseBtn.addEventListener('click', function() {
+                if (currentScale < maxScale) {
+                    currentScale += scaleStep;
+                    applyScale();
+                }
+            });
+
+            decreaseBtn.addEventListener('click', function() {
+                if (currentScale > minScale) {
+                    currentScale -= scaleStep;
+                    applyScale();
+                }
+            });
+
+            function applyScale() {
+                const keys = document.querySelectorAll('.key');
+                keys.forEach(key => {
+                    key.style.fontSize = (16 * currentScale) + 'px';
+                    key.style.padding = (12 * currentScale) + 'px ' + (5 * currentScale) + 'px';
+                });
+
+                // Update keyboard width
+                keyboard.style.width = (600 * currentScale) + 'px';
+            }
+
+            // Detect input focus
+            document.addEventListener('focusin', function(e) {
+                if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+                    activeInput = e.target;
+                }
+            });
+
+            // Keep focus when clicking on keyboard
+            keyboard.addEventListener('mousedown', function(e) {
+                if (!e.target.closest('.keyboard-header') && !e.target.closest('.keyboard-controls')) {
+                    e.preventDefault();
+                    if (activeInput) {
+                        activeInput.focus();
+                    }
+                }
+            });
+
+            // Add resize handlers to keyboard edges
+            function addResizeHandlers() {
+                const resizeHandles = [
+                    { class: 'top-left', cursor: 'nwse-resize' },
+                    { class: 'top-right', cursor: 'nesw-resize' },
+                    { class: 'bottom-left', cursor: 'nesw-resize' },
+                    { class: 'bottom-right', cursor: 'nwse-resize' }
+                ];
+
+                resizeHandles.forEach(handle => {
+                    const el = document.createElement('div');
+                    el.className = `resize-handle ${handle.class}`;
+                    el.style.cursor = handle.cursor;
+                    keyboard.appendChild(el);
+
+                    el.addEventListener('mousedown', startResize);
+                });
+            }
+
+            // Handle resize
+            let isResizing = false;
+            let originalWidth, originalHeight, originalX, originalY;
+            let resizeDir;
+
+            function startResize(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                isResizing = true;
+
+                resizeDir = e.target.className.replace('resize-handle ', '');
+
+                originalWidth = keyboard.offsetWidth;
+                originalHeight = keyboard.offsetHeight;
+                originalX = e.clientX;
+                originalY = e.clientY;
+
+                document.addEventListener('mousemove', resize);
+                document.addEventListener('mouseup', stopResize);
+            }
+
+            function resize(e) {
+                if (!isResizing) return;
+
+                const dx = e.clientX - originalX;
+                const dy = e.clientY - originalY;
+
+                let newWidth = originalWidth;
+                let newHeight = originalHeight;
+
+                if (resizeDir.includes('right')) {
+                    newWidth = originalWidth + dx;
+                } else if (resizeDir.includes('left')) {
+                    newWidth = originalWidth - dx;
+                    if (newWidth > 300) {
+                        keyboard.style.left = (keyboard.offsetLeft + dx) + 'px';
+                    }
+                }
+
+                if (resizeDir.includes('bottom')) {
+                    newHeight = originalHeight + dy;
+                } else if (resizeDir.includes('top')) {
+                    newHeight = originalHeight - dy;
+                    if (newHeight > 200) {
+                        keyboard.style.top = (keyboard.offsetTop + dy) + 'px';
+                    }
+                }
+
+                if (newWidth > 300) {
+                    keyboard.style.width = newWidth + 'px';
+                    // Calculate new scale based on width change
+                    currentScale = newWidth / 600;
+                    applyScale();
+                }
+            }
+
+            function stopResize() {
+                isResizing = false;
+                document.removeEventListener('mousemove', resize);
+                document.removeEventListener('mouseup', stopResize);
+            }
+
+            // Backspace function
+            function deleteChar() {
+                if (activeInput) {
+                    const start = activeInput.selectionStart;
+                    const end = activeInput.selectionEnd;
+                    const value = activeInput.value;
+
+                    if (start === end && start > 0) {
+                        activeInput.value = value.slice(0, start - 1) + value.slice(end);
+                        activeInput.selectionStart = activeInput.selectionEnd = start - 1;
+                    } else if (start !== end) {
+                        activeInput.value = value.slice(0, start) + value.slice(end);
+                        activeInput.selectionStart = activeInput.selectionEnd = start;
+                    }
+
+                    // Trigger input event
+                    const event = new Event('input', { bubbles: true });
+                    activeInput.dispatchEvent(event);
+                }
+            }
+
+            // Cursor movement functions
+            function moveCursorLeft() {
+                if (activeInput) {
+                    const pos = activeInput.selectionStart;
+                    if (pos > 0) {
+                        activeInput.selectionStart = activeInput.selectionEnd = pos - 1;
+                    }
+                }
+            }
+
+            function moveCursorRight() {
+                if (activeInput) {
+                    const pos = activeInput.selectionEnd;
+                    if (pos < activeInput.value.length) {
+                        activeInput.selectionStart = activeInput.selectionEnd = pos + 1;
+                    }
+                }
+            }
+
+            // Handle key clicks
+            function handleKeyClick(e) {
+                const keyElement = e.target.closest('.key');
+                if (!keyElement) return;
+
+                const keyValue = keyElement.dataset.value;
+                const specialAction = keyElement.dataset.special;
+
+                if (specialAction) {
+                    switch (specialAction) {
+                        case 'backspace':
+                            // Initial delete
+                            deleteChar();
+
+                            // Setup long press for backspace
+                            clearInterval(backspaceInterval);
+                            backspaceInterval = setTimeout(function() {
+                                backspaceInterval = setInterval(deleteChar, backspaceSpeed);
+                            }, backspaceDelay);
+
+                            keyElement.addEventListener('mouseup', function onMouseUp() {
+                                clearInterval(backspaceInterval);
+                                keyElement.removeEventListener('mouseup', onMouseUp);
+                            });
+
+                            keyElement.addEventListener('mouseleave', function onMouseLeave() {
+                                clearInterval(backspaceInterval);
+                                keyElement.removeEventListener('mouseleave', onMouseLeave);
+                            });
+                            break;
+
+                        case 'enter':
+                            if (activeInput) {
+                                if (activeInput.tagName === 'TEXTAREA') {
+                                    const start = activeInput.selectionStart;
+                                    const end = activeInput.selectionEnd;
+                                    const value = activeInput.value;
+
+                                    activeInput.value = value.slice(0, start) + '\n' + value.slice(end);
+                                    activeInput.selectionStart = activeInput.selectionEnd = start + 1;
+
+                                    // Trigger input event
+                                    const event = new Event('input', { bubbles: true });
+                                    activeInput.dispatchEvent(event);
+                                } else {
+                                    // Submit form if inside a form
+                                    const form = activeInput.closest('form');
+                                    if (form) form.submit();
+                                }
+                            }
+                            break;
+
+                        case 'space':
+                            if (activeInput) {
+                                const start = activeInput.selectionStart;
+                                const end = activeInput.selectionEnd;
+                                const value = activeInput.value;
+
+                                activeInput.value = value.slice(0, start) + ' ' + value.slice(end);
+                                activeInput.selectionStart = activeInput.selectionEnd = start + 1;
+
+                                // Trigger input event
+                                const event = new Event('input', { bubbles: true });
+                                activeInput.dispatchEvent(event);
+                            }
+                            break;
+
+                        case 'left':
+                            moveCursorLeft();
+                            break;
+
+                        case 'right':
+                            moveCursorRight();
+                            break;
+
+                        case 'shift':
+                            // Toggle shifted state logic would go here
+                            break;
+
+                        default:
+                            // Handle language/layout switch
+                            if (layouts[specialAction]) {
+                                currentLang = specialAction;
+                                keyboardTitle.textContent = layouts[currentLang].title;
+                                renderKeyboard(currentLang);
+                            }
+                            break;
+                    }
+                } else if (keyValue && activeInput) {
+                    // Normal key input
+                    const start = activeInput.selectionStart;
+                    const end = activeInput.selectionEnd;
+                    const value = activeInput.value;
+
+                    activeInput.value = value.slice(0, start) + keyValue + value.slice(end);
+                    activeInput.selectionStart = activeInput.selectionEnd = start + keyValue.length;
+
+                    // Trigger input event
+                    const event = new Event('input', { bubbles: true });
+                    activeInput.dispatchEvent(event);
+                }
+            }
+
+            // Render keyboard based on selected language
+            function renderKeyboard(lang) {
+                const layout = layouts[lang];
+                keyboardContent.innerHTML = '';
+
+                const table = document.createElement('table');
+                table.className = 'keyboard-layout';
+                const tbody = document.createElement('tbody');
+
+                layout.layout.forEach(rowData => {
+                    const tr = document.createElement('tr');
+
+                    rowData.row.forEach((key, index) => {
+                        const td = document.createElement('td');
+                        td.className = 'key';
+                        td.textContent = key;
+                        td.dataset.value = key;
+
+                        // Add special classes and data attributes
+                        if (rowData.special && rowData.special[index]) {
+                            td.dataset.special = rowData.special[index];
+
+                            if (['backspace', 'enter', 'shift'].includes(rowData.special[index])) {
+                                td.classList.add('function');
+                            } else if (['latin', 'numbers', 'symbols', 'japanese-hiragana', 'japanese-katakana', 'korean', 'chinese'].includes(rowData.special[index])) {
+                                td.classList.add('special');
+                            }
+
+                            // Add additional classes for navigation keys
+                            if (['left', 'right'].includes(rowData.special[index])) {
+                                td.classList.add('navigation');
+                            } else if (rowData.special[index] === 'space') {
+                                td.classList.add('space');
+                            }
+                        }
+
+                        // Add colspan if defined
+                        if (rowData.colspan && rowData.colspan[index]) {
+                            td.colSpan = rowData.colspan[index];
+                        }
+
+                        tr.appendChild(td);
+                    });
+
+                    tbody.appendChild(tr);
+                });
+
+                table.appendChild(tbody);
+                keyboardContent.appendChild(table);
+
+                // Add keyboard click handler
+                table.addEventListener('click', handleKeyClick);
+
+                // Apply current scale to newly rendered keyboard
+                applyScale();
+            }
+
+            // Initial render
+            renderKeyboard(currentLang);
+            addResizeHandlers();
+        });

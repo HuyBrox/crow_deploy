@@ -1,0 +1,315 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+
+:root {
+  --primary-color: #e67e22;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+.container-custom {
+  width: 100%;
+  max-width: 1400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  padding: 40px;
+}
+.control {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.flashcards {
+  box-sizing: border-box;
+  background: linear-gradient(135deg, #fad0f6, #ffc695);
+  width: 100%;
+  height: 337px;
+  padding: 80px 20px;
+  text-align: center;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.flashcards h1 {
+  color: #fff;
+  font-size: 44px;
+  font-weight: bold;
+  margin-top: 30px;
+}
+
+.flashcards .description {
+  color: white;
+  font-size: 1em;
+  padding: 10px;
+  line-height: 1.5;
+  margin-bottom: 50px;
+}
+
+.flashcard-categories {
+  display: grid;
+  grid-template-columns: repeat(5, 220px);
+  gap: 30px; /* Tăng từ 20px lên 30px */
+  justify-content: center;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.parent {
+  width: 220px;
+  height: 160px; /* Giảm từ 180px xuống 160px */
+  margin: 10px;
+}
+
+.card {
+  height: 100%;
+  width: 100%;
+  border-radius: 20px; /* Tăng từ 12px lên 20px */
+  padding: 20px; /* Tăng từ 15px lên 20px */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.course-card {
+  animation: 4s gradient-angle infinite linear;
+  border: 4px solid transparent; /* Tăng từ 2px lên 4px */
+  background-image: linear-gradient(#fffefd, #ffdeb1),
+    conic-gradient(
+      from var(--gradient-angle),
+      #ffffff 0%,
+      /* Trắng đầu */ #ffab40 15%,
+      /* Cam nhạt - mờ dần vào */ #ff6f00 25%,
+      /* Cam đậm đầu tiên */ #ffab40 35%,
+      /* Cam nhạt - đậm dần ra */ #ffffff 50%,
+      /* Trắng cách biệt */ #ffab40 65%,
+      /* Cam nhạt - mờ dần vào */ #ff6f00 75%,
+      /* Cam đậm thứ hai */ #ffab40 85%,
+      /* Cam nhạt - đậm dần ra */ #ffffff 100% /* Trắng cuối */
+    );
+  background-clip: padding-box, border-box;
+  background-origin: padding-box, border-box;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.course-card:hover {
+  box-shadow: 0px 8px 20px rgba(230, 126, 34, 0.3);
+  transform: translateY(-5px);
+}
+
+.content {
+  width: 100%;
+  text-align: center;
+}
+
+.content img {
+  width: 100%;
+  height: 70px; /* Giảm từ 80px xuống 70px */
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.content h2 {
+  font-size: 1.1em;
+  color: #333;
+  margin-bottom: 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.content p {
+  font-size: 0.9em;
+  color: #666;
+  margin-bottom: 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.content a {
+  display: inline-block;
+  padding: 6px 12px;
+  background: var(--primary-color);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 0.9em;
+  transition: all 0.3s ease;
+}
+
+.content a:hover {
+  background: #65b5ff;
+  transform: scale(1.05);
+}
+
+#add-card-set {
+  border: 2px dashed var(--primary-color);
+  background: #fff;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+#add-card-set:hover {
+  box-shadow: 0px 8px 20px rgba(230, 126, 34, 0.3);
+  transform: translateY(-5px);
+}
+
+#add-card-set .content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+#add-card-set i {
+  font-size: 2.5em;
+  color: var(--primary-color);
+  margin-bottom: 10px;
+}
+
+#add-card-set h2 {
+  font-size: 1.2em;
+  color: var(--primary-color);
+}
+
+#add-card-set a {
+  margin-top: 10px;
+}
+
+@property --gradient-angle {
+  syntax: "<angle>";
+  initial-value: 0turn;
+  inherits: false;
+}
+
+@keyframes gradient-angle {
+  to {
+    --gradient-angle: 1turn;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .flashcard-categories {
+    grid-template-columns: repeat(4, 220px);
+  }
+}
+
+@media (max-width: 992px) {
+  .flashcard-categories {
+    grid-template-columns: repeat(3, 220px);
+  }
+}
+
+@media (max-width: 768px) {
+  .flashcard-categories {
+    grid-template-columns: repeat(2, 220px);
+  }
+  .parent {
+    width: 100%;
+    max-width: 220px;
+    margin: 10px auto;
+  }
+}
+
+@media (max-width: 576px) {
+  .flashcard-categories {
+    grid-template-columns: 1fr;
+  }
+  .parent {
+    width: 90%;
+    margin: 10px auto;
+  }
+}
+.control a,
+button {
+  display: inline-block;
+  padding: 6px 12px;
+  background: var(--primary-color);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  border: none;
+  font-size: 0.9em;
+  transition: all 0.3s ease;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+.control button:hover {
+  background: #d35400;
+  transform: scale(1.05);
+}
+/* bong bóng */
+/* Import font thanh lịch */
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lora:wght@400;700&display=swap");
+
+section.flashcards {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  min-height: 150px;
+  overflow: hidden;
+  background-color: #f8f1e9; /* Màu nền nhạt, thanh lịch */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ */
+}
+
+section.flashcards .content {
+  position: relative;
+  z-index: 1; /* Đảm bảo chữ nằm trên bong bóng */
+  text-align: center;
+}
+
+section.flashcards h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #000c3f; /* Màu xám đậm nhẹ nhàng */
+  margin-bottom: 15px;
+  letter-spacing: 1px; /* Khoảng cách chữ tinh tế */
+  text-transform: uppercase; /* Chữ in hoa */
+  text-shadow: 1px 1px 2px rgb(4, 12, 131);
+}
+
+section.flashcards .description {
+  font-family: "Lora", serif; /* Font mềm mại, dễ đọc */
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: #555; /* Màu xám trung tính */
+  line-height: 1.6; /* Khoảng cách dòng thoải mái */
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Style cho bong bóng */
+.bubble {
+  position: absolute;
+  background: rgba(255, 182, 193, 0.5); /* Màu hồng phấn nhạt, trong suốt */
+  border-radius: 50%;
+  pointer-events: none; /* Không cản trở tương tác */
+  z-index: 0; /* Nằm dưới chữ */
+}
+/* Style cho bong bóng */
+.bubble {
+  position: absolute;
+  background: rgba(255, 182, 193, 0.5); /* Màu hồng phấn nhạt, trong suốt */
+  border-radius: 50%;
+  pointer-events: none; /* Không cản trở tương tác */
+  z-index: 0; /* Nằm dưới chữ */
+  /* Thêm box-shadow để tạo hiệu ứng 3D */
+  box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.7),
+    /* Ánh sáng bên trong */ inset 0 -5px 15px rgba(255, 182, 193, 0.8),
+    /* Gradient sáng từ dưới */ 0 5px 15px rgba(255, 182, 193, 0.4); /* Đổ bóng bên ngoài */
+  border: 1px solid rgba(255, 255, 255, 0.3); /* Viền sáng nhẹ */
+}

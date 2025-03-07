@@ -1,0 +1,220 @@
+/* Container chính */
+.video-container {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 80px); /* Chiều cao: 100% màn hình trừ 80px */
+  margin-top: 80px; /* Khoảng cách với header */
+  background: cadetblue;
+  overflow: hidden; /* Đảm bảo không bị tràn layout */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Bao thẻ video */
+.video-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* Reset cơ bản cho video */
+video {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Remote video: Chiếm toàn bộ khung */
+#remoteVideo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; /* Chiếm toàn bộ chiều cao */
+  transform: scaleX(-1); /* Lật ngược video */
+  z-index: 5; /* Lớp nền */
+  border-radius: 15px; /* Bo góc */
+  border: 3px solid transparent;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+
+  /* Viền gradient */
+  background: linear-gradient(white, white) padding-box,
+    linear-gradient(
+        90deg,
+        #ff0000,
+        #ff7300,
+        #fffb00,
+        #48ff00,
+        #00fffb,
+        #4800ff,
+        #ff00fb
+      )
+      border-box;
+}
+
+/* Local video: Nhỏ hơn, nằm góc phải dưới */
+#localVideo {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  width: 20%; /* Chiếm 20% chiều rộng */
+  height: auto; /* Tự động theo tỷ lệ */
+  z-index: 10; /* Nằm trên remote video */
+  border-radius: 10px; /* Bo góc */
+  border: 3px solid transparent;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+  transform: scaleX(-1);
+  /* Viền gradient */
+  background: linear-gradient(white, white) padding-box,
+    linear-gradient(
+        90deg,
+        #ff0000,
+        #ff7300,
+        #fffb00,
+        #48ff00,
+        #00fffb,
+        #4800ff,
+        #ff00fb
+      )
+      border-box;
+}
+
+/* Responsive styles */
+@media (max-width: 1200px) {
+  #localVideo {
+    width: 25%; /* Local video lớn hơn trên màn hình nhỏ */
+  }
+}
+
+@media (max-width: 768px) {
+  #localVideo {
+    width: 30%; /* Local video lớn hơn trên màn hình nhỏ hơn */
+    bottom: 5px;
+    right: 5px;
+  }
+
+  #remoteVideo {
+    top: 0; /* Đảm bảo remote video full màn hình */
+    height: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  #localVideo {
+    width: 40%; /* Local video lớn hơn cho thiết bị rất nhỏ */
+    border-radius: 8px; /* Giảm bo góc */
+  }
+}
+
+/* nút thông báo */
+.confirm-dialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.confirm-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.confirm-content button {
+  margin: 10px;
+  padding: 8px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.yes-btn {
+  background-color: #4caf50;
+  color: white;
+}
+
+.no-btn {
+  background-color: #f44336;
+  color: white;
+}
+
+/* css nút */
+/* Container chứa các nút điều khiển */
+.controls {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 15px;
+  z-index: 20;
+}
+
+/* Styling chung cho các nút */
+.controls button {
+  padding: 10px 15px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* Nút tắt mic */
+#toggleMic {
+  background-color: #ff4444;
+  color: white;
+}
+
+#toggleMic:hover {
+  background-color: #cc0000;
+}
+
+/* Nút tắt video */
+#toggleVideo {
+  background-color: #ffbb33;
+  color: white;
+}
+
+#toggleVideo:hover {
+  background-color: #ff8800;
+}
+
+/* Nút kết thúc */
+#endCall {
+  background-color: #d32f2f;
+  color: white;
+}
+
+#endCall:hover {
+  background-color: #b71c1c;
+}
+
+/* Responsive cho màn hình nhỏ */
+@media (max-width: 768px) {
+  .controls {
+    bottom: 10px;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .controls button {
+    width: 80%;
+    padding: 8px;
+    font-size: 14px;
+    text-align: center;
+  }
+}

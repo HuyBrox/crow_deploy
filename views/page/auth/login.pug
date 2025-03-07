@@ -1,0 +1,57 @@
+include ../../mixin/alert.pug
+doctype
+html(lang='vi')
+    head
+        meta(charset='utf-8')
+        title #{$pageTitle}
+        link(rel='stylesheet' href='./css/login.css')
+        link(rel='stylesheet' href='./css/style.css')
+    body
+        +alert-success(5000)
+        +alert-error(5000)
+        h2 CROW.
+        #container.container
+
+            .form-container.sign-up-container
+                form(action='/register' method='POST')
+                    h1 Đăng ký
+                    .social-container
+                        a.social(href='#')
+                            i.fab.fa-facebook-f
+                        a.social(href='#')
+                            i.fab.fa-google-plus-g
+                        a.social(href='#')
+                            i.fab.fa-linkedin-in
+                    span Hoặc sử dụng email của bạn để đăng ký
+                    input(type='text' placeholder='Tên đầy đủ' name='fullname')
+                    input(type='text' placeholder='Tên người dùng' name='username')
+                    input(type='email' placeholder='Email' name='email')
+                    input(type='password' placeholder='Mật khẩu' name='password')
+                    button(type='submit') Đăng ký
+            .form-container.sign-in-container
+                form(action='/login' method='POST')
+                    h1 Đăng nhập
+                    .social-container
+                        a.social(href='#')
+                            i.fab.fa-facebook-f
+                        a.social(href='#')
+                            i.fab.fa-google-plus-g
+                        a.social(href='#')
+                            i.fab.fa-linkedin-in
+                    span hoặc sử dụng tài khoản của bạn
+                    input(type='email' placeholder='Email' name='email')
+                    input(type='password' placeholder='Mật khẩu' name='password')
+                    a(href='#') Quên mật khẩu?
+                    button(type='submit') Đăng nhập
+            .overlay-container
+                .overlay
+                    .overlay-panel.overlay-left
+                        h1 Chào mừng trở lại!
+                        p Để duy trì kết nối với chúng tôi, vui lòng đăng nhập bằng thông tin cá nhân của bạn
+                        button#signIn.ghost Đăng nhập
+                    .overlay-panel.overlay-right
+                        h1 Xin chào, bạn!
+                        p Nhập thông tin cá nhân của bạn và bắt đầu hành trình cùng chúng tôi
+                        button#signUp.ghost Đăng ký
+        script(src='./js/login.js')
+        script(src='./js/index.js')

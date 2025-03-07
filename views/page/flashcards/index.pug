@@ -1,0 +1,39 @@
+extends ../../layout/default.pug
+include ../../mixin/alert.pug
+
+block style
+    link(rel="stylesheet" href="./css/flashcard/flashcards.css")
+    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css")
+block main
+    +alert-success(5000)
+    +alert-error(5000)
+    .container-custom
+
+        section.flashcards
+            .content
+                h1 Flashcards
+                p.description Trong suốt thời gian qua, chúng tôi đã nỗ lực định hình cách mọi người tiếp cận đại học, giúp họ không chỉ học hỏi mà còn trưởng thành qua từng trải nghiệm.
+
+        section.flashcard-categories
+            .card.course-card#add-card-set
+                .content.text-center
+                    i.fas.fa-plus-circle
+                    h2 Tạo thẻ mới
+                    a(href="/flashcards/createCard") Tạo thẻ mới
+
+            if (flashCardSets && flashCardSets.length > 0)
+                each flashcard in flashCardSets
+                    .card.course-card
+                        .content
+                            img(src="./img/course-1.png" alt="hình ảnh thẻ ghi nhớ")
+                            h2 #{flashcard.name}
+                            p #{flashcard.cards ? flashcard.cards.length : 0} thẻ
+                            p Tạo lúc: #{new Date(flashcard.createdAt).toLocaleDateString("vi-VN")}
+                            .control
+                                a(href=`/flashcards/card/${flashcard._id}`) Xem
+                                form(action=`/flashcards/delete/${flashcard._id}?_method=DELETE` method="POST")
+                                    button(type="submit" class="delete-card") Xóa
+            else
+                h3 Chưa có thẻ ghi nhớ nào
+block script2
+    script(src="./js/flashcard/x.js" type="module")
