@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Nếu URL chứa tham số initiatingCall (caller)
     if (initiatingCall && receiverId) {
         const ringingSound = new Audio('/audio/snaptik.vn_17626.mp3');
-        ringingSound.loop = true;
+        
 
 
         const confirmCall = confirm("📞 Bạn có chắc muốn gọi video không?");
