@@ -1,6 +1,6 @@
 /* General Styles */
 body {
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
   background-color: #ffffff;
   color: #333;
   margin: 0;
@@ -13,38 +13,43 @@ body {
   padding: 20px;
   height: 1800px;
   margin-top: 100px;
-  
 }
 
 /* Profile Section */
 .profile {
   display: right;
-  gap : 20px;
+  gap: 20px;
   padding: 20px;
   border-radius: 10px;
   background: white;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
   align-items: center;
   margin-bottom: 30px;
+  display: block;
+}
+
+/*e dit profiel */
+.edit-profile {
+  display: none;
 }
 
 .profile-avatar {
-  position: relative; 
-  z-index: 1; 
+  position: relative;
+  z-index: 1;
   margin-top: 100px;
-  margin-bottom: 25px
+  margin-bottom: 25px;
 }
 
 .profile-avatar::before {
-  content: '';
+  content: "";
   position: absolute;
-  top: -180px; 
-  left: -10px; 
+  top: -180px;
+  left: -10px;
   width: 1380px;
-  height:230px;
-  background-color: #F17202; 
+  height: 230px;
+  background-color: #f17202;
   border-radius: 10px;
-  z-index: -10; 
+  z-index: -10;
 }
 
 .profile-avatar img {
@@ -64,20 +69,20 @@ body {
 }
 
 .profile-info p {
-  margin: 20px 0 ;
+  margin: 20px 0;
   font-size: 16px;
 }
-.profile .profile-info .profile-flag  {
+.profile .profile-info .profile-flag {
   display: flex;
   align-items: center;
   justify-self: space-between;
   gap: 10px;
 }
 
-.profile-flag img{
+.profile-flag img {
   width: 50px;
   height: 50px;
-  flex-shrink: 0; 
+  flex-shrink: 0;
 }
 /*edit */
 .edit button {
@@ -100,7 +105,7 @@ body {
   border-radius: 10px;
   /* margin-bottom: 40px; */
   background: rgb(210, 208, 201);
-  box-shadow: 12px 20px 6px rgba(88, 82, 82, 0.1); 
+  box-shadow: 12px 20px 6px rgba(88, 82, 82, 0.1);
   margin-right: 70%;
 }
 
@@ -110,20 +115,20 @@ body {
   background: #e9eaec;
   color: black;
   border-radius: 20px;
-  width: 120px; 
+  width: 120px;
   font-weight: bold;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .stat-title {
-  font-size: 16px; 
+  font-size: 16px;
   color: #666;
   margin: 0;
 }
 
 .stat-value {
-  font-size: 22px; 
-  color: #F17202;
+  font-size: 22px;
+  color: #f17202;
   margin: 5px 0;
 }
 
@@ -137,15 +142,15 @@ body {
   margin-top: -147px;
   /* margin-bottom: 100px; */
   background: rgb(210, 208, 201);
-  box-shadow: 12px 20px 6px rgba(88, 82, 82, 0.1); 
+  box-shadow: 12px 20px 6px rgba(88, 82, 82, 0.1);
   margin-left: 31%;
   height: 8.5%;
 }
 .activity h3 {
-  color: #F17202;
+  color: #f17202;
   margin-top: 5px;
-  margin-bottom: 20px;  
-  font-size: 20px; 
+  margin-bottom: 20px;
+  font-size: 20px;
 }
 
 .no-activity {
@@ -160,7 +165,7 @@ body {
   padding: 20px;
   border-radius: 10px;
   margin-block-start: 30px;
-  text-align: center; 
+  text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -168,16 +173,16 @@ body {
 
 .course-list {
   display: flex;
-  flex-direction: row; 
+  flex-direction: row;
   gap: 20px;
-  overflow-x: auto; 
+  overflow-x: auto;
   max-width: 80%;
   padding-bottom: 30px;
-  white-space: nowrap; 
+  white-space: nowrap;
 }
 
 .course-list::-webkit-scrollbar {
-  height: 13px;;
+  height: 13px;
 }
 
 .course-list::-webkit-scrollbar-track {
@@ -186,7 +191,7 @@ body {
 }
 
 .course-list::-webkit-scrollbar-thumb {
-  background: #F17202;
+  background: #f17202;
   border-radius: 0;
 }
 
@@ -195,15 +200,15 @@ body {
 }
 
 .course-a {
-  display: flex; 
+  display: flex;
   flex-direction: column;
   align-items: center;
   background: white;
   padding: 25px;
   border-radius: 10px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
-  width: 300px; 
-  white-space: normal; 
+  width: 300px;
+  white-space: normal;
 }
 
 .course-image img {
@@ -215,4 +220,89 @@ body {
 
 .course-info {
   padding: 10px;
+}
+/* css edit popup */
+/* Overlay làm mờ nền */
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Màu đen mờ */
+  z-index: 998; /* Dưới popup nhưng trên các phần tử khác */
+}
+
+.edit-profile {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 999; /* Đè lên overlay và các phần tử khác */
+  width: 90%;
+  max-width: 500px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.edit-profile.active {
+  display: block !important;
+}
+
+.overlay.active {
+  display: block;
+}
+
+#editProfileBtn {
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.form-buttons button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#saveProfile {
+  background: #4caf50;
+  color: white;
+}
+
+#cancelProfile {
+  background: #f44336;
+  color: white;
+}
+#edit.edit-profile {
+  font-style: italic;
+  color: #f17202;
 }

@@ -2,24 +2,25 @@ extends ../../layout/default.pug
 include ../../mixin/alert.pug
 
 block style
-  link(rel='stylesheet', href='/css/profile.css')
+  link(rel='stylesheet' href='/css/profile.css')
 
 block main
   .container
-    input.hidden(type='hidden', id='user', value=user)
+    input.hidden(type='hidden' id='user', value=JSON.stringify(user))
+    .overlay(style='display: none;')
     .profile
       .profile-avatar
-        img(src=user.avatar || '/img/default-avatar.png', alt='Avatar')
+        img(src=user.avatar || '/img/default-avatar.png' alt='Avatar')
       .profile-info
         h2 Tên: #{user.fullname || 'Chưa có thông tin'}
-        p Username: #{user.username || 'Không có username'}      
+        p Username: #{user.username || 'Không có username'}
         p ID: #{user._id || 'Không có ID'}
         p Email: #{user.email || 'Không có email'}
         .profile-flag
           p Quốc gia: #{user.nationality || 'Không rõ'}
           img#quocKy
-        .edit 
-          button#saveProfile Chỉnh sửa
+        .edit
+          button#editProfileBtn Chỉnh sửa
     .profile-stats
       .stat
         p.stat-title Bài đăng
@@ -31,18 +32,39 @@ block main
       h3 Hoạt động gần đây
       p.no-activity #{user.recentActivity || 'Kabbbabbb'}
     .courses
-        h3 Các khóa học đã tham gia
-        .course-list
-            if courses && courses.length
-              each course in courses
-                .course-a
-                  .course-image
-                    img(src="/img/course-1.png" alt=course.name) 
-                  .course-info
-                    h4 #{course.name}
-                    p #{course.description}
-            else
-              p Chưa tham gia khóa học nào.
+      h3 Các khóa học đã tham gia
+      .course-list
+        if courses && courses.length
+          each course in courses
+            .course-a
+              .course-image
+                img(src="/img/course-1.png" alt=course.name)
+              .course-info
+                h4 #{course.name}
+                p #{course.description}
+        else
+          p Chưa tham gia khóa học nào.
+
+    #edit.edit-profile(style='display: none;')
+      h2 CHỈNH SỬA TRANG CÁ NHÂN
+
+      .profile-info
+        form#editProfileForm
+          .form-group
+            label(for='fullname') Fullname
+            input.form-control(type='text' id='fullname' name='fullname', value=user.fullname)
+          .form-group
+            label(for='email') Email
+            input.form-control(type='email' id='email' name='email', value=user.email)
+          .form-group
+            label(for='nationality') National
+            input.form-control(type='text' id='nationality' name='nationality', value=user.nationality || '')
+          .form-group
+            label(for='avatar') Avatar
+            input.form-control(type='file' id='avatar' name='avatar')
+          .form-buttons
+            button#saveProfile(type='submit') Lưu
+            button#cancelProfile(type='button') Hủy
+
 block script2
   script(src='/js/profile.js')
-      
