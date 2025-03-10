@@ -1,6 +1,5 @@
 extends ../../layout/default.pug
 include ../../mixin/alert.pug
-
 block style
     link(rel="stylesheet" href="./css/course.css")
     link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css")
@@ -16,11 +15,11 @@ block main
             div.wrap
                 // Duyệt qua từng khóa học và hiển thị thông tin
                 each course in courses
-                    a(href=`/course/detail/${course.id}`) 
+                    a(href=`/course/detail/${course.id}`)
                         div.course-card
-                            img(src="/img/course-1.png" alt=course.name)
+                            img(src=`${course.thumbnail}` alt=course.name)
                             h3= course.name
-                            p 📚 #{course.lessons.length} Lesson 
+                            p 📚 #{course.lessons.length} Lesson
                             p
                                 // Hiển thị sao cho khóa học
                                 - var rating = 3 // Giả sử bạn có rating sao từ cơ sở dữ liệu

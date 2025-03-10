@@ -1,9 +1,10 @@
 extends ../../layout/default.pug
 include ../../mixin/alert.pug
-//- block script
-//-   script(src="/js/course/lesson.js")
+
 block style
   link(rel="stylesheet" href="/css/lesson.css")
+  link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css")
+
 block main
   .container
     .main-content
@@ -13,15 +14,6 @@ block main
         .lesson-content
           h2#lesson-title= lesson.title
           p#lesson-description= lesson.content
-          ul
-            li Fanpage:
-              a(href="#") https://www.facebook.com/f8vnofficial
-            li Group:
-              a(href="#") https://www.facebook.com/groups/649972919142215
-            li Youtube:
-              a(href="#") https://www.youtube.com/F8VNOfficial
-            li Hữu Kỳ:
-              a(href="#") https://www.facebook.com/sondnf8
       else if lesson.type === 'task'
         .task-container
           input#sheetName(type="hidden" value=lesson.jsonTask)
@@ -59,6 +51,29 @@ block main
               button#quiz_prev Prev
               ul
               button#quiz_next Next
+        .lesson-content
+          h2#lesson-title= lesson.title
+          p#lesson-description= lesson.content
+          // Xử lý task nếu cần
+      else
+        .lesson-content
+          h2#lesson-title= lesson.title
+          p#lesson-description= lesson.content
+          p Loại bài học không xác định
+      // Đặt nút ghi chú ngoài if để luôn hiển thị
+      .lesson-actions
+        button#note-btn
+          i.fas.fa-pen
+          | Ghi chú
+        form#note-form(action=`/course/${course._id}/lesson/${lesson._id}/note` method="POST")
+          textarea(name="noteContent" placeholder="Nhập ghi chú của bạn..." rows="4")= userNote
+          button(type="submit") Lưu ghi chú
+
+      if userNote
+        .note-display
+          h3 Ghi chú của bạn:
+          p= userNote
+
     .sidebar
       h3 Nội dung khóa học
       ul.lesson-list
@@ -66,23 +81,26 @@ block main
           li(class=(lesson._id.toString() === lessonId ? "active" : ""))
             a.lesson-link(href=`/course/${course._id}/lesson/${lesson._id}` data-lesson-id=lesson._id)= `${index + 1}. ${lesson.title}`
 
+block script
+  script(src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js")
+  script.
+    document.addEventListener('DOMContentLoaded', () => {
+      const noteBtn = document.getElementById('note-btn');
+      const noteForm = document.getElementById('note-form');
+
+      if (noteBtn && noteForm) {
+        noteBtn.addEventListener('click', () => {
+          if (noteForm.style.display === 'none' || noteForm.style.display === '') {
+            noteForm.style.display = 'block';
+            noteBtn.innerHTML = '<i class="fas fa-times"></i> Đóng ghi chú';
+          } else {
+            noteForm.style.display = 'none';
+            noteBtn.innerHTML = '<i class="fas fa-pen"></i> Ghi chú';
+          }
+        });
+      } else {
+        console.error('note-btn or note-form not found!');
+      }
+    });
 block script2
   script(src="/js/lesson.js")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
