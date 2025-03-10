@@ -9,7 +9,7 @@ const chatInput = document.querySelector('.chat-text-input');
 const sendButton = document.querySelector('.send-button');
 const userId = document.querySelector('.userId')?.value;
 
-const socket = io('http://localhost:5000', { query: { userId } });
+const socket = io('https://crow-r6s9.onrender.com', { query: { userId } });
 socket.on('connect', () => {
     console.log('Đã kết nối tới server');
 });
