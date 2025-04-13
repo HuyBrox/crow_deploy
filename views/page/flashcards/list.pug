@@ -1,0 +1,87 @@
+include ../../layout/default.pug
+include ../../mixin/alert.pug
+
+block style
+    style.
+        table {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        th, td {
+            vertical-align: middle;
+            padding: 10px;
+        }
+        .x {
+            min-height: 100vh;
+            display: flex;
+
+            margin-top: 8rem;
+            margin-bottom: 3rem;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 15px;
+            padding-right: 15px;
+            width: 100%;
+            display: block;
+        }
+
+        /* Từ vựng: cam lợt */
+        td.vocab {
+            background-color:rgb(255, 249, 242); /* cam lợt */
+        }
+
+        /* Nghĩa: cam nhạt hơn */
+        td.meaning {
+            background-color:rgb(255, 253, 252); /* cam nhạt */
+        }
+
+        th {
+            background-color: #ffa94d !important;
+            color: white;
+            resize: horizontal;
+            overflow: auto;
+            min-width: 100px;
+        }
+        table {
+            font-size: 1.1rem;
+            font-weight: 600;
+            table-layout: auto; /* Cho phép tự co giãn */
+            width: 100%;
+        }
+        tr:hover {
+            background-color: #ffecb5 !important; /* cam nhạt */
+        }
+        footer {
+            display: none;
+        }
+
+block main
+    +alert-success(5000)
+    +alert-error(5000)
+
+    .x.mt-5
+        .x
+            h2.text-center.mb-4 #{title}
+            if flashCard.cards.length
+                table.table.table-bordered.table-striped.table-hover.text-center
+                    thead.table-dark
+                        tr
+                            th(style="width: 25%") Từ vựng
+                            th(style="width: 25%") Nghĩa
+                            th(style="width: 25%") Từ vựng
+                            th(style="width: 25%") Nghĩa
+                    tbody
+                    - for (let i = 0; i < flashCard.cards.length; i += 2)
+                        tr
+                            td.vocab #{flashCard.cards[i].vocabulary}
+                            td.meaning #{flashCard.cards[i].meaning}
+                            if flashCard.cards[i + 1]
+                                td.vocab #{flashCard.cards[i + 1].vocabulary}
+                                td.meaning #{flashCard.cards[i + 1].meaning}
+                            else
+                                td.vocab(colspan="2")
+
+            else
+                .alert.alert-warning.text-center Không có từ nào trong bộ thẻ này.
+block script2
