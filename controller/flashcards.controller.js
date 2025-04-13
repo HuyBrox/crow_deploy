@@ -193,3 +193,22 @@ export const baiTapTuVung = async (req, res) => {
         return res.redirect('/flashcards');
     }
 };
+export const getList = async (req, res) => {
+
+    try {
+        const user = res.locals.user;
+        const cardId = req.params.id;
+        const flashCard = await FlashCard.findOne({ _id: cardId, user: user._id });
+        if (!flashCard) {
+            req.flash('error', 'Không tìm thấy bộ thẻ!');
+            return res.redirect('/flashcards');
+        }
+        res.render('./page/flashcards/list', {
+            title: "Thẻ " + flashCard.name,
+            flashCard,
+        });
+    } catch (error) {
+        req.flash('error', 'Có lỗi khi tải bộ thẻ!');
+        res.redirect('/flashcards');
+    }
+}
