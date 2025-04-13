@@ -31,6 +31,7 @@ block main
                             p Tạo lúc: #{new Date(flashcard.createdAt).toLocaleDateString("vi-VN")}
                             .control
                                 a(href=`/flashcards/card/${flashcard._id}`) Xem
+                                a(href=`/flashcards/list/${flashcard._id}`) List
                                 form(action=`/flashcards/delete/${flashcard._id}?_method=DELETE` method="POST")
                                     button(type="submit" class="delete-card") Xóa
             else
