@@ -79,7 +79,7 @@ router.post('/AI-gen', requireAuth, async (req, res) => {
         console.log('Câu hỏi:', question);
         console.log('Ngôn ngữ đầu ra:', outputLang);
 
-        const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+        const model = genAI.getGenerativeModel({ model: 'gemini-1.5-pro' });
 
         // Tạo prompt tối ưu để chỉ nhận bản dịch
         const prompt = `Translate the following text into ${outputLang} and return only the translated text, nothing else:\n"${question}"`;
@@ -176,7 +176,7 @@ router.get('/AI-gen-quiz/:id', requireAuth, async (req, res) => {
             return res.redirect(`/flashcards/${id}`);
         }
 
-        const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+        const model = genAI.getGenerativeModel({  model: 'gemini-1.5-pro'  });
 
         // prompt gộp cho tất cả các flashcard
         let prompt = `
