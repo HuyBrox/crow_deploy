@@ -176,7 +176,7 @@ router.get('/AI-gen-quiz/:id', requireAuth, async (req, res) => {
             return res.redirect(`/flashcards/${id}`);
         }
 
-        const model = genAI.getGenerativeModel({  model: 'gemini-1.5-pro'  });
+        const model = genAI.getGenerativeModel({  model: 'gemini-1.5-flash'  });
 
         // prompt gộp cho tất cả các flashcard
         let prompt = `
@@ -195,8 +195,22 @@ Here is the input flashcards array:
 `;
         prompt += JSON.stringify(cardsData);
 
-        const result = await model.generateContent(prompt);
-        let rawText = result.response.text().trim();
+        let rawText = '';
+try {
+    const result = await model.generateContent(prompt);
+    rawText = result.response.text().trim();
+} catch (error) {
+    if (error.statusCode === 429) {
+        console.error('Đã vượt quá hạn mức API Gemini, vui lòng thử lại sau hoặc nâng cấp gói.');
+        req.flash('error', 'Hết lượt sử dụng miễn phí hôm nay. Vui lòng thử lại sau!');
+        return res.redirect(`/flashcards/${id}`);
+    } else {
+        console.error('Lỗi khi gọi Gemini API:', error.message);
+        req.flash('error', 'Lỗi khi tạo bài tập.');
+        return res.redirect(`/flashcards/${id}`);
+    }
+}
+
 
         // Loại bỏ markdown code fences nếu có
         rawText = rawText.replace(/^```(?:json)?\s*/, '').replace(/\s*```$/, '');
