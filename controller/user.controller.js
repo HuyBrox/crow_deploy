@@ -121,7 +121,7 @@ export const postLogin = async (req, res) => {
         res.cookie('token', token, {
             httpOnly: true,
             sameSite: 'strict',
-            maxAge: 5 * 60 * 60 * 1000, // 5 giờ
+            maxAge: 48 * 60 * 60 * 1000, // 48 giờ
         });
 
         res.locals.user = user;
