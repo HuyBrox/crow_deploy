@@ -117,7 +117,7 @@ export const postLogin = async (req, res) => {
             return res.redirect('/login');
         }
 
-        const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: '5h' });
+        const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: '48h' });
         res.cookie('token', token, {
             httpOnly: true,
             sameSite: 'strict',
