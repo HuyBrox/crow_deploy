@@ -257,3 +257,24 @@ $(document).ready(function () {
     closeBtn.addEventListener('click', () => { choiseContainer.classList.remove('show') });
 
 });
+
+// Lắng nghe sự kiện phím từ bàn phím
+document.addEventListener('keydown', (e) => {
+    switch (e.key) {
+        case 'ArrowRight':
+            nextButton.click();
+            break;
+        case 'ArrowLeft':
+            prevButton.click();
+            break;
+        case 'ArrowDown':
+        case ' ':
+            e.preventDefault(); // Ngăn scroll khi nhấn space
+            if (cardsElement[currentActiveCard]) {
+                cardsElement[currentActiveCard].classList.toggle("show-answer");
+            }
+            break;
+        default:
+            break;
+    }
+});
