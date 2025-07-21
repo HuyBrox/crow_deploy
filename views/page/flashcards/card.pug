@@ -16,11 +16,10 @@ block main
             button#random.clear.btn.btn-custom
                 i.fas.fa-random.mr-2
                 |  Trộn thẻ
-            .toggle-wrapper
-                span Đảo:
-                label.switch
-                    input(type="checkbox" id="reverse-toggle")
-                span.slider
+            button#reverse.clear.btn.btn-custom
+                i.fas.fa-retweet.mr-2
+                |  Đảo 
+
         h1
             | Thẻ [#{flashCard.name}]
             button#show.btn.btn-custom
