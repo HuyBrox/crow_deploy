@@ -13,6 +13,8 @@ const cardData = document.querySelector(".card-data");
 const flashcard = JSON.parse(cardData.getAttribute("data"));
 const listCard = flashcard.cards;
 
+let isReversed = false;
+
 // Chuyển đổi dữ liệu từ BE thành { question, answer }
 let cardsData = listCard.map(card => ({
     question: card.vocabulary,
@@ -278,17 +280,18 @@ document.addEventListener('keydown', (e) => {
             break;
     }
 });
-let isReversed = false; // Mặc định: từ vựng → nghĩa
 
-const reverseButton = document.getElementById("reverse");
-reverseButton.addEventListener("click", () => {
-    isReversed = !isReversed;
 
-    // Đảo lại dữ liệu
+const reverseToggle = document.getElementById("reverse-toggle");
+
+reverseToggle.addEventListener("change", () => {
+    isReversed = reverseToggle.checked;
+
     cardsData = listCard.map(card => ({
         question: isReversed ? card.meaning : card.vocabulary,
         answer: isReversed ? card.vocabulary : card.meaning
     }));
 
-    createCards(); // Tạo lại thẻ với dữ liệu đã đảo
+    createCards(); // Cập nhật giao diện mới
 });
+
