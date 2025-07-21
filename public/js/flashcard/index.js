@@ -278,3 +278,17 @@ document.addEventListener('keydown', (e) => {
             break;
     }
 });
+let isReversed = false; // Mặc định: từ vựng → nghĩa
+
+const reverseButton = document.getElementById("reverse");
+reverseButton.addEventListener("click", () => {
+    isReversed = !isReversed;
+
+    // Đảo lại dữ liệu
+    cardsData = listCard.map(card => ({
+        question: isReversed ? card.meaning : card.vocabulary,
+        answer: isReversed ? card.vocabulary : card.meaning
+    }));
+
+    createCards(); // Tạo lại thẻ với dữ liệu đã đảo
+});
