@@ -282,16 +282,15 @@ document.addEventListener('keydown', (e) => {
 });
 
 
-const reverseToggle = document.getElementById("reverse-toggle");
 
-reverseToggle.addEventListener("change", () => {
-    isReversed = reverseToggle.checked;
+document.getElementById("reverse").addEventListener("click", () => {
+    isReversed = !isReversed;
 
     cardsData = listCard.map(card => ({
         question: isReversed ? card.meaning : card.vocabulary,
         answer: isReversed ? card.vocabulary : card.meaning
     }));
 
-    createCards(); // Cập nhật giao diện mới
+    createCards();
 });
 
